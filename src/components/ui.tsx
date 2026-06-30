@@ -1,0 +1,8 @@
+import { cn } from "@/lib/utils";
+import type { LucideIcon } from "lucide-react";
+
+export function Card({ children, className }: { children: React.ReactNode; className?: string }) { return <section className={cn("card", className)}>{children}</section>; }
+export function CardHeader({ title, eyebrow, action }: { title: string; eyebrow?: string; action?: React.ReactNode }) { return <div className="flex items-start justify-between gap-4 px-5 pt-5"><div>{eyebrow && <p className="mb-1 text-[10px] font-bold uppercase tracking-[.18em] text-[#b7f34a]">{eyebrow}</p>}<h2 className="text-sm font-semibold text-zinc-100">{title}</h2></div>{action}</div>; }
+export function Metric({ label, value, detail, icon: Icon }: { label: string; value: React.ReactNode; detail?: string; icon?: LucideIcon }) { return <div className="card p-4"><div className="flex items-center justify-between text-xs text-zinc-500"><span>{label}</span>{Icon && <Icon size={14}/>}</div><div className="mt-2 text-2xl font-semibold tracking-tight">{value}</div>{detail && <p className="mt-1 text-xs text-zinc-500">{detail}</p>}</div>; }
+export function Badge({ children, tone = "default" }: { children: React.ReactNode; tone?: "default" | "green" | "red" }) { return <span className={cn("inline-flex rounded-md border px-2 py-1 text-[10px]", tone === "default" && "border-white/10 bg-white/5 text-zinc-400", tone === "green" && "border-emerald-500/20 bg-emerald-500/10 text-emerald-400", tone === "red" && "border-red-500/20 bg-red-500/10 text-red-400")}>{children}</span>; }
+export function Empty({ children }: { children: React.ReactNode }) { return <div className="grid min-h-44 place-items-center p-6 text-center text-sm text-zinc-500">{children}</div>; }

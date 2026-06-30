@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+:root { --background: #07090d; --foreground: #f4f4f5; --muted: #9094a0; --card: #101318; --border: #23272f; --lime: #b7f34a; }
+* { box-sizing: border-box; }
+html { background: var(--background); scroll-behavior: smooth; }
+body { margin: 0; color: var(--foreground); background: radial-gradient(circle at 48% -15%, #1a2422 0, #07090d 34rem); font-family: Arial, Helvetica, sans-serif; }
+button, input { font: inherit; }
+a { color: inherit; text-decoration: none; }
+::selection { background: #b7f34a; color: #090b0d; }
+.card { border: 1px solid var(--border); background: color-mix(in srgb, var(--card) 94%, transparent); border-radius: 16px; }
+.grid-glow { background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px); background-size: 42px 42px; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.skeleton { background: linear-gradient(90deg, #15181e 25%, #23272d 50%, #15181e 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite; }
+@keyframes shimmer { to { background-position: -200% 0; } }
+@keyframes fade-up { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.fade-up { animation: fade-up .45s ease-out both; }
+
+/* Shared motion language */
+.global-pointer-ring { pointer-events:none; position:fixed; left:0; top:0; z-index:9998; display:none; width:30px; height:30px; border:1px solid rgba(183,243,74,.62); border-radius:999px; mix-blend-mode:difference; transition:width .2s ease,height .2s ease,margin .2s ease,background-color .2s ease,opacity .2s ease; will-change:transform; }
+.global-pointer-dot { pointer-events:none; position:fixed; left:0; top:0; z-index:9999; display:none; width:6px; height:6px; border-radius:999px; background:#b7f34a; box-shadow:0 0 12px #b7f34a; will-change:transform; }
+.global-pointer-ring.pointer-active { width:46px; height:46px; margin:-8px 0 0 -8px; background:rgba(183,243,74,.12); border-color:#b7f34a; }
+.global-pointer-ring.pointer-hidden { opacity:0; }
+@media (pointer:fine) and (min-width:768px) { .global-pointer-ring,.global-pointer-dot { display:block; } }
+
+body > main { animation: page-arrive .65s cubic-bezier(.22,1,.36,1) both; }
+body > main > section:not(.sheet-hero) { animation: section-arrive .7s cubic-bezier(.22,1,.36,1) both; }
+body > main > section:nth-child(2) { animation-delay:.08s; }
+body > main > section:nth-child(3) { animation-delay:.14s; }
+body > main > section:nth-child(4) { animation-delay:.2s; }
+.card { animation:card-arrive .55s cubic-bezier(.22,1,.36,1) both; transition:border-color .25s ease,transform .25s ease,box-shadow .25s ease,background-color .25s ease; }
+.card:nth-child(2) { animation-delay:.04s; }.card:nth-child(3) { animation-delay:.08s; }.card:nth-child(4) { animation-delay:.12s; }
+.card:hover { box-shadow:0 14px 45px rgba(0,0,0,.2); }
+main button,main a { transition:color .2s ease,background-color .2s ease,border-color .2s ease,transform .2s ease,opacity .2s ease; }
+main button:active,main a:active { transform:scale(.97); }
+header > div > a > span { animation: logo-pulse 3s ease-in-out infinite; }
+.skeleton { position:relative; overflow:hidden; }
+.skeleton::after { content:""; position:absolute; inset:0; background:linear-gradient(105deg,transparent 35%,rgba(183,243,74,.08) 50%,transparent 65%); transform:translateX(-100%); animation:skeleton-sweep 1.8s ease-in-out infinite; }
+@keyframes page-arrive { from { opacity:0; transform:translateY(12px); filter:blur(5px) } to { opacity:1; transform:none; filter:none } }
+@keyframes section-arrive { from { opacity:0; transform:translateY(22px) } to { opacity:1; transform:none } }
+@keyframes card-arrive { from { opacity:0; transform:translateY(14px) scale(.985) } to { opacity:1; transform:none } }
+@keyframes logo-pulse { 0%,100% { box-shadow:0 0 0 0 rgba(183,243,74,0) } 50% { box-shadow:0 0 22px rgba(183,243,74,.22) } }
+@keyframes skeleton-sweep { to { transform:translateX(100%) } }
+
+.sheet-page { background: #080a0d; }
+.sheet-hero { background-image: radial-gradient(circle at 75% 45%, rgba(183,243,74,.11), transparent 28rem), linear-gradient(rgba(255,255,255,.023) 1px, transparent 1px), linear-gradient(90deg,rgba(255,255,255,.023) 1px,transparent 1px); background-size: auto, 44px 44px, 44px 44px; }
+.sheet-outline { color: transparent; -webkit-text-stroke: 1px rgba(244,244,245,.55); }
+.sheet-reveal { animation: sheet-reveal .8s cubic-bezier(.22,1,.36,1) both; }
+.sheet-delay-1 { animation-delay: .08s; }.sheet-delay-2 { animation-delay: .16s; }.sheet-delay-3 { animation-delay: .24s; }
+.sheet-float { animation: sheet-float 5s ease-in-out infinite; }
+.sheet-bounce { animation: sheet-bounce 1.4s ease-in-out infinite; }
+.sheet-orbit { position: absolute; border: 1px solid rgba(183,243,74,.09); border-radius: 9999px; animation: sheet-spin 22s linear infinite; }
+.sheet-orbit::after { content:""; position:absolute; width:7px; height:7px; border-radius:50%; background:#b7f34a; box-shadow:0 0 18px #b7f34a; top:14%; left:14%; }
+.sheet-orbit-one { width:430px; height:430px; right:-190px; top:-210px; }.sheet-orbit-two { width:260px; height:260px; left:-150px; bottom:-110px; animation-direction:reverse; animation-duration:16s; }
+.sheet-marquee { animation: sheet-marquee 24s linear infinite; }
+@keyframes sheet-reveal { from { opacity:0; transform:translateY(24px); filter:blur(8px) } to { opacity:1; transform:none; filter:none } }
+@keyframes sheet-float { 0%,100% { transform:translateY(0) rotate(-.5deg) } 50% { transform:translateY(-12px) rotate(.5deg) } }
+@keyframes sheet-bounce { 0%,100% { transform:translateY(-2px) } 50% { transform:translateY(3px) } }
+@keyframes sheet-spin { to { transform:rotate(360deg) } }
+@keyframes sheet-marquee { to { transform:translateX(-50%) } }
+@media (prefers-reduced-motion: reduce) { *,*::before,*::after { scroll-behavior:auto!important; animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; } .global-pointer-ring,.global-pointer-dot { display:none!important; } }

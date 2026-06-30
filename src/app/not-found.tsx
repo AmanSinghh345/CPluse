@@ -1,0 +1,2 @@
+import Link from "next/link";
+export default function NotFound(){return <main className="grid min-h-[75vh] place-items-center px-5 text-center"><div><p className="font-mono text-sm text-[#b7f34a]">404 // WRONG_ANSWER</p><h1 className="mt-4 text-4xl font-semibold">That route didn&apos;t pass pretests.</h1><p className="mt-3 text-sm text-zinc-500">The page moved, never existed, or found a particularly mean edge case.</p><Link href="/" className="mt-7 inline-block rounded-lg bg-white px-4 py-2 text-sm font-medium text-black">Back to CPulse</Link></div></main>}
