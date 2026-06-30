@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { ArrowDown, ArrowUpRight, BookOpen, Check, CheckCircle2, ChevronDown, Circle, Code2, FileText, Folder, FolderOpen, HelpCircle, Lightbulb, ListChecks, Search, Sparkles, Target, X } from "lucide-react";
+import { ArrowDown, ArrowUpRight, BookOpen, Check, CheckCircle2, ChevronDown, Circle, Code2, FileText, Folder, FolderOpen, HelpCircle, Lightbulb, Search, Sparkles, Target, X } from "lucide-react";
 import { dsaSheet, sheetQuestions, type CategoryFolder as CategoryFolderType, type PatternSubtopic, type Question, type TheoryBlock, type TopicFolder as TopicFolderType } from "@/data/dsaSheet";
-import { Badge, Card, Empty } from "@/components/ui";
+import { Card, Empty } from "@/components/ui";
 import { cn } from "@/lib/utils";
 
 type Progress = Record<string, { done: boolean; note: string }>;
@@ -30,6 +30,26 @@ function countCompletedInCategory(progress: Progress, topic: string, category: C
 
 function countCompletedInTopic(progress: Progress, topic: TopicFolderType) {
   return (topic.subtopics ?? []).reduce((sum, subtopic) => sum + countCompletedInSubtopic(progress, topic.topic, undefined, subtopic), 0) + (topic.categories ?? []).reduce((sum, category) => sum + countCompletedInCategory(progress, topic.topic, category), 0);
+}
+
+function findQuestionForNote(noteFor: string | undefined) {
+  if (!noteFor) return undefined;
+  for (const topic of dsaSheet) {
+    for (const category of topic.categories ?? []) {
+      for (const subtopic of category.subtopics) {
+        for (const question of subtopic.questions) {
+          const key = questionKey(topic.topic, category.name, subtopic.name, question);
+          if (key === noteFor) return { key, topic: topic.topic, category: category.name, subtopic: subtopic.name, question };
+        }
+      }
+    }
+    for (const subtopic of topic.subtopics ?? []) {
+      for (const question of subtopic.questions) {
+        const key = questionKey(topic.topic, undefined, subtopic.name, question);
+        if (key === noteFor) return { key, topic: topic.topic, category: undefined, subtopic: subtopic.name, question };
+      }
+    }
+  }
 }
 
 function ProgressCount({ completed, total }: { completed: number; total: number }) {
@@ -174,19 +194,7 @@ export default function SheetPage() {
     return dsaSheet.filter((item) => item.topic.toLowerCase().includes(normalized));
   }, [query]);
 
-  const activeQuestion = useMemo(() => {
-    if (!noteFor) return undefined;
-    for (const topic of dsaSheet) {
-      for (const category of topic.categories ?? []) for (const subtopic of category.subtopics) for (const question of subtopic.questions) {
-        const key = questionKey(topic.topic, category.name, subtopic.name, question);
-        if (key === noteFor) return { key, topic: topic.topic, category: category.name, subtopic: subtopic.name, question };
-      }
-      for (const subtopic of topic.subtopics ?? []) for (const question of subtopic.questions) {
-        const key = questionKey(topic.topic, undefined, subtopic.name, question);
-        if (key === noteFor) return { key, topic: topic.topic, category: undefined, subtopic: subtopic.name, question };
-      }
-    }
-  }, [noteFor]);
+  const activeQuestion = findQuestionForNote(noteFor);
 
   const completed = sheetQuestions.filter((question) => question.status === "done").length + Object.values(progress).filter((item) => item.done).length;
   const percent = sheetQuestions.length ? Math.round((completed / sheetQuestions.length) * 100) : 0;

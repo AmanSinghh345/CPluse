@@ -68,6 +68,13 @@ const refs = {
   bitManipulation: { title: "GFG Bitwise Algorithms", url: "https://www.geeksforgeeks.org/dsa/bitwise-algorithms/" },
   rangeTrees: { title: "CP-Algorithms: Fenwick Tree", url: "https://cp-algorithms.com/data_structures/fenwick.html" },
   math: { title: "CP-Algorithms: Algebra", url: "https://cp-algorithms.com/algebra/" },
+  design: { title: "GFG Design Data Structures", url: "https://www.geeksforgeeks.org/design-data-structures/" },
+  mixed: { title: "LeetCode Problemset", url: "https://leetcode.com/problemset/" },
+  advancedGraph: { title: "CP-Algorithms: Graph Algorithms", url: "https://cp-algorithms.com/graph/" },
+  advancedDp: { title: "CP-Algorithms: Dynamic Programming", url: "https://cp-algorithms.com/dynamic_programming/intro-to-dp.html" },
+  advancedStrings: { title: "CP-Algorithms: String Processing", url: "https://cp-algorithms.com/string/" },
+  cpMisc: { title: "CP-Algorithms: Data Structures", url: "https://cp-algorithms.com/data_structures/" },
+  revision: { title: "LeetCode Interview 150", url: "https://leetcode.com/studyplan/top-interview-150/" },
 };
 
 const q = (title: string, source?: string): Question => ({ title, source, url: questionUrl(title, source), status: "pending" });
@@ -4042,6 +4049,720 @@ export const dsaSheet: TopicFolder[] = [
         theory: [
           { title: "Goal", type: "notes", description: "For Backtracking + Recursion, solve around 40-55 questions.", points: ["Subsets", "Subsets II", "Combinations", "Combination Sum", "Combination Sum II", "Combination Sum III", "Permutations", "Permutations II", "Letter Combinations of a Phone Number", "Generate Parentheses", "Letter Case Permutation", "Restore IP Addresses", "Palindrome Partitioning", "Word Search", "Word Search II", "N-Queens", "N-Queens II", "Sudoku Solver", "Partition to K Equal Sum Subsets", "Matchsticks to Square", "Fair Distribution of Cookies", "Beautiful Arrangement", "Can I Win", "Expression Add Operators", "Split a String Into the Max Number of Unique Substrings"], references: [refs.backtracking] },
           { title: "Most important OA/interview patterns", type: "notes", points: ["subsets", "combinations", "permutations", "generate parentheses", "palindrome partitioning", "word search", "N-Queens", "Sudoku", "partition to K equal subsets", "bitmask recursion"], references: [refs.backtracking] },
+        ],
+        questions: [],
+      },
+    ],
+  },
+  {
+    topic: "Design + Data Structure Implementation",
+    subtopics: [
+      {
+        name: "Checkpoint 0: Design thinking",
+        theory: checkpoint("Design questions usually test", ["Which data structure to use?", "How to make operations O(1), O(log n), or efficient?", "How to handle edge cases?", "How to combine two data structures?", "Common combos: HashMap, linked list, heap, trie, vector + hashmap, two heaps, segment tree/Fenwick."], [refs.design]),
+        questions: [],
+      },
+      {
+        name: "Basic array/string design",
+        theory: pattern("Use this when the prompt asks to implement a class, store values, answer multiple queries, or support add/get/remove.", [refs.design]),
+        questions: [q("Shuffle an Array", "LeetCode 384"), q("Design Parking System", "LeetCode 1603"), q("Design Browser History", "LeetCode 1472"), q("Design HashSet", "LeetCode 705"), q("Design HashMap", "LeetCode 706"), q("Range Sum Query - Immutable", "LeetCode 303"), q("Range Sum Query 2D - Immutable", "LeetCode 304"), q("Product of the Last K Numbers", "LeetCode 1352")],
+      },
+      {
+        name: "Stack design",
+        theory: pattern("Use stack design when the last inserted item matters, or when push/pop must also expose min, max, undo, or recent operation state.", [refs.design]),
+        questions: [q("Min Stack", "LeetCode 155"), q("Implement Stack using Queues", "LeetCode 225"), q("Validate Stack Sequences", "LeetCode 946"), q("Online Stock Span", "LeetCode 901"), q("Dinner Plate Stacks", "LeetCode 1172"), q("Max Stack", "LeetCode 716 / premium"), q("Design a Stack With Increment Operation", "LeetCode 1381"), q("Removing Stars From a String", "LeetCode 2390")],
+      },
+      {
+        name: "Queue / deque design",
+        theory: pattern("Use queue/deque design for FIFO, stream requests, last k seconds, sliding windows, and ordered processing.", [refs.design]),
+        questions: [q("Implement Queue using Stacks", "LeetCode 232"), q("Design Circular Queue", "LeetCode 622"), q("Design Circular Deque", "LeetCode 641"), q("Number of Recent Calls", "LeetCode 933"), q("Moving Average from Data Stream", "LeetCode 346"), q("First Unique Number", "LeetCode 1429"), q("Dota2 Senate", "LeetCode 649"), q("Hit Counter", "LeetCode 362 / GFG")],
+      },
+      {
+        name: "HashMap / HashSet design",
+        theory: pattern("Use hashmap for fast lookup, key-value storage, frequency count, timestamp mapping, and id-to-object mapping.", [refs.design]),
+        questions: [q("Design HashSet", "LeetCode 705"), q("Design HashMap", "LeetCode 706"), q("Two Sum III - Data Structure Design", "LeetCode 170"), q("Logger Rate Limiter", "LeetCode 359"), q("Encode and Decode TinyURL", "LeetCode 535"), q("Time Based Key-Value Store", "LeetCode 981"), q("Design Underground System", "LeetCode 1396"), q("Design File System", "LeetCode 1166"), q("Design Authentication Manager", "LeetCode 1797"), q("Design Memory Allocator", "LeetCode 2502")],
+      },
+      {
+        name: "Randomized data structure",
+        theory: pattern("For O(1) insert/delete/getRandom, combine vector + hashmap. Delete by swapping with the last element and updating the stored index.", [refs.design]),
+        questions: [q("Insert Delete GetRandom O(1)", "LeetCode 380"), q("Insert Delete GetRandom O(1) - Duplicates Allowed", "LeetCode 381"), q("Random Pick Index", "LeetCode 398"), q("Random Pick with Weight", "LeetCode 528"), q("Random Point in Non-overlapping Rectangles", "LeetCode 497"), q("Random Pick with Blacklist", "LeetCode 710"), q("Linked List Random Node", "LeetCode 382"), q("Shuffle an Array", "LeetCode 384")],
+      },
+      {
+        name: "LRU / LFU cache design",
+        theory: pattern("LRU Cache uses HashMap + Doubly Linked List: hashmap maps key to node, list keeps most recent near front and least recent near back.", [refs.design]),
+        questions: [q("LRU Cache", "LeetCode 146"), q("LFU Cache", "LeetCode 460"), q("Design Browser History", "LeetCode 1472"), q("Design In-Memory File System", "LeetCode 588"), q("All O`one Data Structure", "LeetCode 432"), q("Design Twitter", "LeetCode 355")],
+      },
+      {
+        name: "Heap / priority queue design",
+        theory: pattern("Use heap design for smallest/largest available item, stream kth largest, median stream, task scheduling, and server allocation.", [refs.design]),
+        questions: [q("Kth Largest Element in a Stream", "LeetCode 703"), q("Find Median from Data Stream", "LeetCode 295"), q("Seat Reservation Manager", "LeetCode 1845"), q("Smallest Number in Infinite Set", "LeetCode 2336"), q("Task Scheduler", "LeetCode 621"), q("Single-Threaded CPU", "LeetCode 1834"), q("Process Tasks Using Servers", "LeetCode 1882"), q("Meeting Rooms III", "LeetCode 2402"), q("Design Twitter", "LeetCode 355")],
+      },
+      {
+        name: "Two heaps design",
+        theory: checkpoint("Two heaps idea", ["max heap = smaller half", "min heap = larger half", "Keep sizes balanced.", "Odd count median is left.top(); even count median is average of both tops."], [refs.design]),
+        questions: [q("Find Median from Data Stream", "LeetCode 295"), q("Sliding Window Median", "LeetCode 480"), q("MKAverage", "LeetCode 1825"), q("Median in a Stream", "GFG"), q("Find Right Interval", "LeetCode 436")],
+      },
+      {
+        name: "Trie design",
+        theory: pattern("Use Trie for insert/search/startsWith, autocomplete, dictionary, wildcard search, and prefix sum.", [refs.design]),
+        questions: [q("Implement Trie", "LeetCode 208"), q("Design Add and Search Words Data Structure", "LeetCode 211"), q("Map Sum Pairs", "LeetCode 677"), q("Implement Magic Dictionary", "LeetCode 676"), q("Search Suggestions System", "LeetCode 1268"), q("Design Search Autocomplete System", "LeetCode 642"), q("Stream of Characters", "LeetCode 1032"), q("Prefix and Suffix Search", "LeetCode 745")],
+      },
+      {
+        name: "Iterator design",
+        theory: pattern("Use iterator design for next(), hasNext(), peek(), flattening nested structures, and lazy traversal.", [refs.design]),
+        questions: [q("Peeking Iterator", "LeetCode 284"), q("Flatten Nested List Iterator", "LeetCode 341"), q("Binary Search Tree Iterator", "LeetCode 173"), q("Zigzag Iterator", "LeetCode 281"), q("Combination Iterator", "LeetCode 1286"), q("Design Compressed String Iterator", "LeetCode 604"), q("RLE Iterator", "LeetCode 900"), q("Flatten 2D Vector", "LeetCode 251")],
+      },
+      {
+        name: "Linked list design",
+        theory: pattern("Use linked list design when insert/delete node in O(1), move node to front/back, maintain order, or previous/next pointers are needed.", [refs.design]),
+        questions: [q("Design Linked List", "LeetCode 707"), q("Design Browser History", "LeetCode 1472"), q("LRU Cache", "LeetCode 146"), q("LFU Cache", "LeetCode 460"), q("Flatten a Multilevel Doubly Linked List", "LeetCode 430"), q("Copy List with Random Pointer", "LeetCode 138"), q("All O`one Data Structure", "LeetCode 432")],
+      },
+      {
+        name: "Ordered set / map design",
+        theory: pattern("Use ordered map/set for sorted intervals, nearest lower/upper value, floor/ceil, range overlap, and dynamic interval merging.", [refs.design]),
+        questions: [q("My Calendar I", "LeetCode 729"), q("My Calendar II", "LeetCode 731"), q("My Calendar III", "LeetCode 732"), q("Range Module", "LeetCode 715"), q("Summary Ranges", "LeetCode 352"), q("Data Stream as Disjoint Intervals", "LeetCode 352"), q("Exam Room", "LeetCode 855"), q("Contains Duplicate III", "LeetCode 220")],
+      },
+      {
+        name: "Range query design",
+        theory: pattern("Pick prefix sum for static range queries, Fenwick for point update + range sum, segment tree for range updates, and ordered map for dynamic intervals.", [refs.design]),
+        questions: [q("Range Sum Query - Immutable", "LeetCode 303"), q("Range Sum Query 2D - Immutable", "LeetCode 304"), q("Range Sum Query - Mutable", "LeetCode 307"), q("NumMatrix Design", "LeetCode 304"), q("Range Module", "LeetCode 715"), q("My Calendar III", "LeetCode 732"), q("Booking Concert Tickets in Groups", "LeetCode 2286"), q("Snapshot Array", "LeetCode 1146")],
+      },
+      {
+        name: "Snapshot / versioned data structure",
+        theory: pattern("Use when prompts mention timestamp, snapshot, version, get value at time t, or history. Common combo: key -> vector of {timestamp, value}, then binary search.", [refs.design]),
+        questions: [q("Snapshot Array", "LeetCode 1146"), q("Time Based Key-Value Store", "LeetCode 981"), q("Design File System", "LeetCode 1166"), q("Design Underground System", "LeetCode 1396"), q("Design Log Storage System", "LeetCode 635"), q("Design Hit Counter", "LeetCode 362")],
+      },
+      {
+        name: "File system / object design",
+        theory: pattern("Think in terms of entities, operations, data structures per entity, and time complexity per method.", [refs.design]),
+        questions: [q("Design File System", "LeetCode 1166"), q("Design In-Memory File System", "LeetCode 588"), q("Design Search Autocomplete System", "LeetCode 642"), q("Design Twitter", "LeetCode 355"), q("Design Underground System", "LeetCode 1396"), q("Design Parking System", "LeetCode 1603"), q("Design Authentication Manager", "LeetCode 1797"), q("Design Memory Allocator", "LeetCode 2502")],
+      },
+      {
+        name: "Advanced O(1) data structures",
+        theory: pattern("Use when the prompt demands O(1) insert, delete, min/max/random, or frequency update. Usually combines HashMap, doubly linked list, set, vector, and stack.", [refs.design]),
+        questions: [q("Insert Delete GetRandom O(1)", "LeetCode 380"), q("Insert Delete GetRandom O(1) - Duplicates Allowed", "LeetCode 381"), q("All O`one Data Structure", "LeetCode 432"), q("LRU Cache", "LeetCode 146"), q("LFU Cache", "LeetCode 460"), q("Max Stack", "LeetCode 716"), q("Dinner Plate Stacks", "LeetCode 1172")],
+      },
+      {
+        name: "Minimum target",
+        theory: [
+          { title: "Goal", type: "notes", description: "For Design + DS Implementation, solve around 40-55 questions.", points: ["Min Stack", "Implement Queue using Stacks", "Implement Stack using Queues", "Design Circular Queue", "Design Circular Deque", "Number of Recent Calls", "Design HashSet", "Design HashMap", "Insert Delete GetRandom O(1)", "Random Pick with Weight", "LRU Cache", "LFU Cache", "Kth Largest Element in a Stream", "Find Median from Data Stream", "Time Based Key-Value Store", "Snapshot Array", "Implement Trie", "Design Add and Search Words Data Structure", "Search Suggestions System", "Peeking Iterator", "Flatten Nested List Iterator", "Binary Search Tree Iterator", "Design Browser History", "My Calendar I", "My Calendar II", "My Calendar III", "Range Module", "Design Twitter", "Design Underground System", "All O`one Data Structure"], references: [refs.design] },
+          { title: "Placement priority", type: "notes", points: ["Min Stack", "Queue using Stacks", "Stack using Queues", "Design HashMap / HashSet", "Insert Delete GetRandom O(1)", "LRU Cache", "Find Median from Data Stream", "Time Based Key-Value Store", "Snapshot Array", "Implement Trie", "My Calendar I/II/III"], references: [refs.design] },
+        ],
+        questions: [],
+      },
+    ],
+  },
+  {
+    topic: "Mixed OA Patterns + Company-style Problems",
+    subtopics: [
+      {
+        name: "Pure simulation problems",
+        theory: pattern("Use simulation when rules are directly given, no known algorithm is needed, and state changes after each operation.", [refs.mixed]),
+        questions: [q("Baseball Game", "LeetCode 682"), q("Robot Return to Origin", "LeetCode 657"), q("Spiral Matrix", "LeetCode 54"), q("Game of Life", "LeetCode 289"), q("Robot Bounded In Circle", "LeetCode 1041"), q("Dota2 Senate", "LeetCode 649"), q("Prison Cells After N Days", "LeetCode 957"), q("Walking Robot Simulation", "LeetCode 874"), q("Design Browser History", "LeetCode 1472"), q("Asteroid Collision", "LeetCode 735")],
+      },
+      {
+        name: "Implementation-heavy array/string OA",
+        theory: pattern("Use careful parsing for string rules, numbers stored as strings, operator precedence, encoding/decoding, and version comparison.", [refs.mixed]),
+        questions: [q("String Compression", "LeetCode 443"), q("Count and Say", "LeetCode 38"), q("Integer to Roman", "LeetCode 12"), q("Roman to Integer", "LeetCode 13"), q("Zigzag Conversion", "LeetCode 6"), q("Multiply Strings", "LeetCode 43"), q("Add Binary", "LeetCode 67"), q("Compare Version Numbers", "LeetCode 165"), q("Basic Calculator II", "LeetCode 227"), q("Decode String", "LeetCode 394")],
+      },
+      {
+        name: "Interval + event mixed problems",
+        theory: pattern("Use intervals for start/end time, meetings, bookings, overlaps, minimum rooms, and active events.", [refs.mixed]),
+        questions: [q("Merge Intervals", "LeetCode 56"), q("Insert Interval", "LeetCode 57"), q("Non-overlapping Intervals", "LeetCode 435"), q("Minimum Number of Arrows to Burst Balloons", "LeetCode 452"), q("Meeting Rooms II", "LeetCode 253 / GFG"), q("Minimum Platforms", "GFG"), q("Car Pooling", "LeetCode 1094"), q("My Calendar I", "LeetCode 729"), q("My Calendar II", "LeetCode 731"), q("My Calendar III", "LeetCode 732"), q("Number of Flowers in Full Bloom", "LeetCode 2251"), q("Minimum Interval to Include Each Query", "LeetCode 1851")],
+      },
+      {
+        name: "Frequency + sorting / heap mixed problems",
+        theory: pattern("Use frequency + heap/sort for most frequent, least frequent, remove k elements, rearrange characters, and grouping consecutive numbers.", [refs.mixed]),
+        questions: [q("Top K Frequent Elements", "LeetCode 347"), q("Top K Frequent Words", "LeetCode 692"), q("Sort Characters By Frequency", "LeetCode 451"), q("Task Scheduler", "LeetCode 621"), q("Reorganize String", "LeetCode 767"), q("Reduce Array Size to The Half", "LeetCode 1338"), q("Least Number of Unique Integers after K Removals", "LeetCode 1481"), q("Hand of Straights", "LeetCode 846"), q("Divide Array in Sets of K Consecutive Numbers", "LeetCode 1296"), q("Find Original Array From Doubled Array", "LeetCode 2007")],
+      },
+      {
+        name: "Scheduling problems",
+        theory: pattern("Scheduling usually needs sorting by start time plus a heap for available options, ending times, or greedy choice.", [refs.mixed]),
+        questions: [q("Meeting Rooms II", "LeetCode 253"), q("Task Scheduler", "LeetCode 621"), q("Single-Threaded CPU", "LeetCode 1834"), q("Process Tasks Using Servers", "LeetCode 1882"), q("Maximum Number of Events That Can Be Attended", "LeetCode 1353"), q("Course Schedule III", "LeetCode 630"), q("Meeting Rooms III", "LeetCode 2402"), q("The Number of the Smallest Unoccupied Chair", "LeetCode 1942"), q("Minimum Number of Refueling Stops", "LeetCode 871"), q("IPO", "LeetCode 502")],
+      },
+      {
+        name: "Grid mixed problems",
+        theory: pattern("Use grid logic for matrix, island, spread, nearest cell, shortest path, and 4/8-direction movement.", [refs.mixed]),
+        questions: [q("Number of Islands", "LeetCode 200"), q("Max Area of Island", "LeetCode 695"), q("Flood Fill", "LeetCode 733"), q("Rotting Oranges", "LeetCode 994"), q("01 Matrix", "LeetCode 542"), q("Shortest Path in Binary Matrix", "LeetCode 1091"), q("Word Search", "LeetCode 79"), q("Pacific Atlantic Water Flow", "LeetCode 417"), q("Surrounded Regions", "LeetCode 130"), q("Making A Large Island", "LeetCode 827"), q("Shortest Bridge", "LeetCode 934"), q("Swim in Rising Water", "LeetCode 778")],
+      },
+      {
+        name: "State BFS problems",
+        theory: pattern("Use state BFS when visited needs more than one dimension, like visited[node][mask], visited[x][y][keys], or visited[node][color].", [refs.mixed]),
+        questions: [q("Open the Lock", "LeetCode 752"), q("Word Ladder", "LeetCode 127"), q("Minimum Genetic Mutation", "LeetCode 433"), q("Shortest Path in Binary Matrix", "LeetCode 1091"), q("Shortest Path Visiting All Nodes", "LeetCode 847"), q("Shortest Path to Get All Keys", "LeetCode 864"), q("Snakes and Ladders", "LeetCode 909"), q("Shortest Path with Alternating Colors", "LeetCode 1129"), q("Minimum Moves to Move a Box to Their Target Location", "LeetCode 1263"), q("Escape the Spreading Fire", "LeetCode 2258")],
+      },
+      {
+        name: "Binary search + greedy mixed problems",
+        theory: pattern("Use when the prompt says minimum possible maximum, maximum possible minimum, minimum speed/days/capacity, or asks if something can be done with x.", [refs.mixed]),
+        questions: [q("Koko Eating Bananas", "LeetCode 875"), q("Capacity To Ship Packages Within D Days", "LeetCode 1011"), q("Split Array Largest Sum", "LeetCode 410"), q("Allocate Minimum Pages", "GFG"), q("Painter's Partition Problem", "GFG"), q("Aggressive Cows", "GFG"), q("Magnetic Force Between Two Balls", "LeetCode 1552"), q("Minimum Number of Days to Make m Bouquets", "LeetCode 1482"), q("Find the Smallest Divisor Given a Threshold", "LeetCode 1283"), q("Minimum Time to Complete Trips", "LeetCode 2187"), q("Minimum Time to Repair Cars", "LeetCode 2594"), q("Maximum Candies Allocated to K Children", "LeetCode 2226")],
+      },
+      {
+        name: "Prefix + hashmap mixed OA",
+        theory: pattern("Use for count/longest subarray, sum equals k, sum divisible by k, same remainder, equal 0 and 1, and submatrix sum.", [refs.mixed]),
+        questions: [q("Subarray Sum Equals K", "LeetCode 560"), q("Subarray Sums Divisible by K", "LeetCode 974"), q("Continuous Subarray Sum", "LeetCode 523"), q("Contiguous Array", "LeetCode 525"), q("Binary Subarrays With Sum", "LeetCode 930"), q("Count Number of Nice Subarrays", "LeetCode 1248"), q("Make Sum Divisible by P", "LeetCode 1590"), q("Count Interesting Subarrays", "LeetCode 2845"), q("Count Subarrays With Median K", "LeetCode 2488"), q("Number of Submatrices That Sum to Target", "LeetCode 1074")],
+      },
+      {
+        name: "Greedy + heap mixed hard problems",
+        theory: pattern("Use greedy + heap when candidates change over time and you must choose the best available option for profit, cost, hiring, or refueling.", [refs.mixed]),
+        questions: [q("Furthest Building You Can Reach", "LeetCode 1642"), q("Minimum Number of Refueling Stops", "LeetCode 871"), q("IPO", "LeetCode 502"), q("Course Schedule III", "LeetCode 630"), q("Maximum Performance of a Team", "LeetCode 1383"), q("Maximum Subsequence Score", "LeetCode 2542"), q("Total Cost to Hire K Workers", "LeetCode 2462"), q("Minimum Cost to Hire K Workers", "LeetCode 857"), q("Meeting Rooms III", "LeetCode 2402"), q("Process Tasks Using Servers", "LeetCode 1882")],
+      },
+      {
+        name: "Monotonic stack / queue mixed OA",
+        theory: pattern("Use for next/previous greater/smaller, window maximum, subarray minimum contribution, and nearest greater/smaller elements.", [refs.mixed]),
+        questions: [q("Daily Temperatures", "LeetCode 739"), q("Next Greater Element II", "LeetCode 503"), q("Online Stock Span", "LeetCode 901"), q("Remove K Digits", "LeetCode 402"), q("Largest Rectangle in Histogram", "LeetCode 84"), q("Maximal Rectangle", "LeetCode 85"), q("Sum of Subarray Minimums", "LeetCode 907"), q("Sum of Subarray Ranges", "LeetCode 2104"), q("Sliding Window Maximum", "LeetCode 239"), q("Shortest Subarray with Sum at Least K", "LeetCode 862"), q("Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit", "LeetCode 1438"), q("Jump Game VI", "LeetCode 1696")],
+      },
+      {
+        name: "DP + sorting / binary search mixed",
+        theory: pattern("Use when you sort first, then choose a compatible previous state, chain, increasing order, or non-overlapping jobs.", [refs.mixed]),
+        questions: [q("Longest Increasing Subsequence", "LeetCode 300"), q("Russian Doll Envelopes", "LeetCode 354"), q("Maximum Length of Pair Chain", "LeetCode 646"), q("Longest String Chain", "LeetCode 1048"), q("Maximum Profit in Job Scheduling", "LeetCode 1235"), q("Delete and Earn", "LeetCode 740"), q("Best Team With No Conflicts", "LeetCode 1626"), q("Minimum Number of Removals to Make Mountain Array", "LeetCode 1671"), q("Number of Longest Increasing Subsequence", "LeetCode 673"), q("Count Number of Teams", "LeetCode 1395")],
+      },
+      {
+        name: "DP + bitmask mixed problems",
+        theory: pattern("Use when n <= 20 and the state is a subset mask, visited mask, task assignment, or group choice.", [refs.mixed]),
+        questions: [q("Beautiful Arrangement", "LeetCode 526"), q("Can I Win", "LeetCode 464"), q("Matchsticks to Square", "LeetCode 473"), q("Partition to K Equal Sum Subsets", "LeetCode 698"), q("Shortest Path Visiting All Nodes", "LeetCode 847"), q("Smallest Sufficient Team", "LeetCode 1125"), q("Minimum XOR Sum of Two Arrays", "LeetCode 1879"), q("Maximum Students Taking Exam", "LeetCode 1349"), q("Number of Ways to Wear Different Hats to Each Other", "LeetCode 1434"), q("Minimum Cost to Connect Two Groups of Points", "LeetCode 1595")],
+      },
+      {
+        name: "Company-style custom problem patterns",
+        theory: checkpoint("Common OA custom patterns", ["Logs / timestamps", "Resource allocation", "String parsing", "Ranking / leaderboard", "Transactions / fraud / anomaly"], [refs.mixed]),
+        questions: [q("Exclusive Time of Functions", "LeetCode 636"), q("Design Log Storage System", "LeetCode 635"), q("Alert Using Same Key-Card Three or More Times", "LeetCode 1604"), q("Employee Free Time", "LeetCode 759"), q("Design Leaderboard", "LeetCode 1244"), q("Rank Teams by Votes", "LeetCode 1366"), q("Invalid Transactions", "LeetCode 1169"), q("Time Based Key-Value Store", "LeetCode 981"), q("Snapshot Array", "LeetCode 1146"), q("Restore IP Addresses", "LeetCode 93")],
+      },
+      {
+        name: "Minimum target",
+        theory: [
+          { title: "Goal", type: "notes", description: "For Mixed OA Patterns, solve around 60-80 questions.", points: ["Spiral Matrix", "Game of Life", "Asteroid Collision", "Decode String", "Basic Calculator II", "Compare Version Numbers", "Merge Intervals", "Meeting Rooms II", "Car Pooling", "My Calendar III", "Top K Frequent Elements", "Task Scheduler", "Reorganize String", "Single-Threaded CPU", "Process Tasks Using Servers", "Rotting Oranges", "01 Matrix", "Word Ladder", "Open the Lock", "Koko Eating Bananas", "Ship Packages Within D Days", "Split Array Largest Sum", "Subarray Sum Equals K", "Subarray Sums Divisible by K", "Furthest Building You Can Reach", "IPO", "Course Schedule III", "Daily Temperatures", "Largest Rectangle in Histogram", "Sliding Window Maximum", "Longest Increasing Subsequence", "Russian Doll Envelopes", "Maximum Profit in Job Scheduling", "Partition to K Equal Sum Subsets", "Shortest Path Visiting All Nodes"], references: [refs.mixed] },
+          { title: "Most important OA mixed patterns", type: "notes", points: ["simulation", "interval events", "heap scheduling", "prefix hashmap", "binary search on answer", "grid BFS", "state BFS", "monotonic stack", "DP + sorting", "bitmask DP"], references: [refs.mixed] },
+        ],
+        questions: [],
+      },
+    ],
+  },
+  {
+    topic: "Advanced Graph Algorithms",
+    subtopics: [
+      {
+        name: "Checkpoint 0: Prerequisites",
+        theory: checkpoint("Before this topic, know", ["BFS", "DFS", "Cycle detection", "Bipartite graph", "Topological sort", "Dijkstra", "Bellman-Ford", "Floyd-Warshall", "DSU", "MST basics"], [refs.advancedGraph]),
+        questions: [],
+      },
+      {
+        name: "Bridges in graph",
+        theory: checkpoint("Tarjan bridge checkpoint", ["tin[node] = discovery time", "low[node] = lowest reachable discovery time", "Bridge condition: low[child] > tin[node]", "Use for critical edge / critical connection / removing edge disconnects graph."], [refs.advancedGraph]),
+        questions: [q("Bridges in Graph", "GFG"), q("Critical Connections in a Network", "LeetCode 1192"), q("Minimum Days to Disconnect Island", "LeetCode 1568"), q("Edge Connectivity Basics", "GFG"), q("Road Construction / Bridge variants", "CSES / CP")],
+      },
+      {
+        name: "Articulation points",
+        theory: checkpoint("Articulation checkpoint", ["For non-root node: low[child] >= tin[node].", "Root is articulation point if it has more than 1 DFS child.", "Use for critical node, cut vertex, single point of failure."], [refs.advancedGraph]),
+        questions: [q("Articulation Point", "GFG"), q("Minimum Days to Disconnect Island", "LeetCode 1568"), q("Critical Nodes in Network", "GFG"), q("Cut Vertex Problems", "CP / GFG"), q("Network Reliability Problems", "GFG")],
+      },
+      {
+        name: "Strongly Connected Components",
+        theory: checkpoint("Kosaraju steps", ["DFS and store nodes by finish time.", "Reverse all edges.", "DFS in finish-time order.", "Each DFS gives one SCC."], [refs.advancedGraph]),
+        questions: [q("Strongly Connected Components", "GFG"), q("Kosaraju Algorithm", "GFG"), q("Tarjan SCC Algorithm", "GFG"), q("Strongly Connected Components", "CSES"), q("Check if Directed Graph is Strongly Connected", "GFG"), q("Mother Vertex", "GFG"), q("Maximum Employees to Be Invited to a Meeting", "LeetCode 2127"), q("Largest Color Value in a Directed Graph", "LeetCode 1857")],
+      },
+      {
+        name: "Condensation graph / SCC DAG",
+        theory: pattern("Find SCCs, compress each SCC into one node, then solve on the resulting DAG.", [refs.advancedGraph]),
+        questions: [q("SCC Condensation Graph", "GFG"), q("Strongly Connected Components", "CSES"), q("Coin Collector", "CSES"), q("Planets and Kingdoms", "CSES"), q("2-SAT Basics", "CP / GFG")],
+      },
+      {
+        name: "Advanced DSU",
+        theory: pattern("Use advanced DSU for dynamic merges, offline queries, connectivity after adding edges, same group, largest component, and grid components.", [refs.advancedGraph]),
+        questions: [q("Redundant Connection", "LeetCode 684"), q("Accounts Merge", "LeetCode 721"), q("Most Stones Removed with Same Row or Column", "LeetCode 947"), q("Regions Cut By Slashes", "LeetCode 959"), q("Making A Large Island", "LeetCode 827"), q("Remove Max Number of Edges to Keep Graph Fully Traversable", "LeetCode 1579"), q("Checking Existence of Edge Length Limited Paths", "LeetCode 1697"), q("Number of Good Paths", "LeetCode 2421"), q("Similar String Groups", "LeetCode 839"), q("Bricks Falling When Hit", "LeetCode 803")],
+      },
+      {
+        name: "DSU on grid",
+        theory: codeNote("Grid cell to node", "int node = r * cols + c;", "Convert cells to node ids and union neighboring cells.", [refs.advancedGraph]),
+        questions: [q("Number of Islands", "LeetCode 200"), q("Number of Islands II", "LeetCode 305 / GFG"), q("Making A Large Island", "LeetCode 827"), q("Regions Cut By Slashes", "LeetCode 959"), q("Bricks Falling When Hit", "LeetCode 803"), q("Swim in Rising Water", "LeetCode 778"), q("Minimize Malware Spread", "LeetCode 924")],
+      },
+      {
+        name: "Offline queries with DSU",
+        theory: pattern("Sort/process queries offline when online connectivity is hard. Add edges in sorted order and answer connectivity with DSU.", [refs.advancedGraph]),
+        questions: [q("Checking Existence of Edge Length Limited Paths", "LeetCode 1697"), q("Bricks Falling When Hit", "LeetCode 803"), q("Remove Max Number of Edges to Keep Graph Fully Traversable", "LeetCode 1579"), q("Distance Limited Paths Exist", "LeetCode 1697"), q("Dynamic Connectivity Offline", "CP / GFG")],
+      },
+      {
+        name: "Advanced shortest path",
+        theory: checkpoint("Pattern types", ["Normal Dijkstra: positive edge weights", "Modified Dijkstra: distance state has extra info", "0-1 BFS: edge weights are 0 or 1", "Bellman-Ford: negative edges / limited stops", "Floyd-Warshall: all-pairs shortest path"], [refs.advancedGraph]),
+        questions: [q("Cheapest Flights Within K Stops", "LeetCode 787"), q("Network Delay Time", "LeetCode 743"), q("Path With Minimum Effort", "LeetCode 1631"), q("Swim in Rising Water", "LeetCode 778"), q("Minimum Cost to Make at Least One Valid Path in a Grid", "LeetCode 1368"), q("Path with Maximum Probability", "LeetCode 1514"), q("Number of Ways to Arrive at Destination", "LeetCode 1976"), q("Find the City With the Smallest Number of Neighbors", "LeetCode 1334"), q("Minimum Weighted Subgraph With the Required Paths", "LeetCode 2203"), q("Second Minimum Time to Reach Destination", "LeetCode 2045")],
+      },
+      {
+        name: "0-1 BFS",
+        theory: codeNote("Deque idea", "if (edgeWeight == 0) {\n    dq.push_front(neighbor);\n} else {\n    dq.push_back(neighbor);\n}", "Use when edge costs are only 0 or 1, such as free move vs paid move.", [refs.advancedGraph]),
+        questions: [q("0-1 BFS Algorithm", "GFG"), q("Minimum Cost to Make at Least One Valid Path in a Grid", "LeetCode 1368"), q("Shortest Path with Edge Weight 0 or 1", "GFG"), q("Ocean Currents", "SPOJ"), q("Chef and Reversing", "CodeChef")],
+      },
+      {
+        name: "MST advanced",
+        theory: pattern("Use MST when connecting all nodes with minimum total cost. Kruskal sorts edges by weight and uses DSU.", [refs.advancedGraph]),
+        questions: [q("Kruskal Algorithm", "GFG"), q("Prim Algorithm", "GFG"), q("Min Cost to Connect All Points", "LeetCode 1584"), q("Connecting Cities With Minimum Cost", "LeetCode 1135 / GFG"), q("Optimize Water Distribution in a Village", "LeetCode 1168"), q("Critical and Pseudo-Critical Edges in MST", "LeetCode 1489"), q("Remove Max Number of Edges to Keep Graph Fully Traversable", "LeetCode 1579")],
+      },
+      {
+        name: "Euler path / Euler circuit",
+        theory: checkpoint("Euler rules", ["Undirected Euler circuit: all nodes have even degree.", "Undirected Euler path: exactly 0 or 2 odd-degree nodes.", "Directed Euler path: one out=in+1, one in=out+1, all others equal.", "Use when every edge must be used exactly once."], [refs.advancedGraph]),
+        questions: [q("Euler Path and Circuit", "GFG"), q("Reconstruct Itinerary", "LeetCode 332"), q("Valid Arrangement of Pairs", "LeetCode 2097"), q("De Bruijn Sequence / Crack Safe", "LeetCode 753"), q("Mail Delivery", "CSES")],
+      },
+      {
+        name: "Graph DP on DAG",
+        theory: pattern("For DAG, topological sort first, then DP in topo order for longest path, number of ways, or color frequency.", [refs.advancedGraph]),
+        questions: [q("Longest Path in DAG", "GFG"), q("Course Schedule III / variants", "LeetCode"), q("Largest Color Value in a Directed Graph", "LeetCode 1857"), q("Parallel Courses III", "LeetCode 2050"), q("Longest Flight Route", "CSES"), q("Game Routes", "CSES"), q("Coin Collector", "CSES"), q("Build a Matrix With Conditions", "LeetCode 2392")],
+      },
+      {
+        name: "Functional graph",
+        theory: pattern("Use when each node points to exactly one node. Techniques include cycle detection, topological trimming, binary lifting, and distance to cycle.", [refs.advancedGraph]),
+        questions: [q("Longest Cycle in a Graph", "LeetCode 2360"), q("Maximum Employees to Be Invited to a Meeting", "LeetCode 2127"), q("Find Closest Node to Given Two Nodes", "LeetCode 2359"), q("Planets Queries I", "CSES"), q("Planets Queries II", "CSES"), q("Planets Cycles", "CSES")],
+      },
+      {
+        name: "Network flow",
+        theory: pattern("Advanced and usually not needed for normal placements. Know bipartite matching and max-flow idea.", [refs.advancedGraph]),
+        questions: [q("Max Flow Algorithm", "GFG"), q("Ford-Fulkerson Algorithm", "GFG"), q("Edmonds-Karp Algorithm", "GFG"), q("Dinic Algorithm", "CP"), q("Maximum Bipartite Matching", "GFG"), q("Maximum Students Taking Exam", "LeetCode 1349 / matching variant"), q("Min Cut Problems", "GFG")],
+      },
+      {
+        name: "2-SAT",
+        theory: pattern("Build implication graph and find SCCs. If x and not x are in the same SCC, the formula is impossible.", [refs.advancedGraph]),
+        questions: [q("2-SAT Algorithm", "GFG"), q("Giant Pizza", "CSES"), q("Boolean Satisfiability with Two Variables", "CP"), q("Satisfiability of Equality Equations", "LeetCode 990, easier DSU variant")],
+      },
+      {
+        name: "Minimum target",
+        theory: [
+          { title: "Goal", type: "notes", description: "For Advanced Graph, solve around 35-50 questions.", points: ["Critical Connections in a Network", "Bridges in Graph", "Articulation Point", "Minimum Days to Disconnect Island", "Strongly Connected Components", "Kosaraju Algorithm", "Mother Vertex", "Coin Collector", "Redundant Connection", "Most Stones Removed with Same Row or Column", "Making A Large Island", "Bricks Falling When Hit", "Checking Existence of Edge Length Limited Paths", "Minimum Cost to Make at Least One Valid Path in a Grid", "Second Minimum Time to Reach Destination", "Critical and Pseudo-Critical Edges in MST", "Reconstruct Itinerary", "Valid Arrangement of Pairs", "Longest Path in DAG", "Largest Color Value in a Directed Graph", "Parallel Courses III", "Longest Cycle in a Graph", "Maximum Employees to Be Invited to a Meeting", "Planets Queries I", "Giant Pizza"], references: [refs.advancedGraph] },
+          { title: "Placement priority", type: "notes", points: ["Critical Connections", "Articulation Point basics", "Kosaraju SCC", "Advanced DSU: Making A Large Island, Bricks Falling", "0-1 BFS", "Graph DP on DAG", "Functional graph basics"], references: [refs.advancedGraph] },
+        ],
+        questions: [],
+      },
+    ],
+  },
+  {
+    topic: "Advanced DP Optimization",
+    subtopics: [
+      {
+        name: "Checkpoint 0: Prerequisites",
+        theory: checkpoint("Do this after normal DP", ["1D DP", "Grid DP", "Knapsack", "LCS", "LIS", "Partition DP", "Tree DP", "Bitmask DP"], [refs.advancedDp]),
+        questions: [],
+      },
+      {
+        name: "Space optimization in DP",
+        theory: codeNote("Rolling state idea", "vector<int> prev(m, 0), curr(m, 0);\n\nint prev2 = 0;\nint prev1 = 1;\n\nfor (int i = 2; i <= n; i++) {\n    int curr = prev1 + prev2;\n    prev2 = prev1;\n    prev1 = curr;\n}", "Use when dp[i] depends on dp[i-1], or dp[row] depends only on previous/current row.", [refs.advancedDp]),
+        questions: [q("Climbing Stairs", "LeetCode 70"), q("House Robber", "LeetCode 198"), q("Unique Paths", "LeetCode 62"), q("Minimum Path Sum", "LeetCode 64"), q("Triangle", "LeetCode 120"), q("Partition Equal Subset Sum", "LeetCode 416"), q("Coin Change", "LeetCode 322"), q("Coin Change II", "LeetCode 518"), q("Longest Common Subsequence", "LeetCode 1143"), q("Edit Distance", "LeetCode 72")],
+      },
+      {
+        name: "Prefix sum optimization in DP",
+        theory: codeNote("Prefix transition", "prefix[j] = prefix[j - 1] + dp[j];\n\nsum(l, r) = prefix[r] - prefix[l - 1];", "Use when transition sums a range like dp[i-1][0] + ... + dp[i-1][j].", [refs.advancedDp]),
+        questions: [q("Number of Dice Rolls With Target Sum", "LeetCode 1155"), q("Count Vowel Permutation", "LeetCode 1220"), q("Number of Ways to Stay in the Same Place After Some Steps", "LeetCode 1269"), q("Knight Dialer", "LeetCode 935"), q("Student Attendance Record II", "LeetCode 552"), q("Count Ways to Build Good Strings", "LeetCode 2466"), q("Count Sorted Vowel Strings", "LeetCode 1641"), q("Profitable Schemes", "LeetCode 879"), q("K Inverse Pairs Array", "LeetCode 629"), q("Paint House II", "LeetCode 265")],
+      },
+      {
+        name: "DP + binary search",
+        theory: pattern("Use for sorted input, previous compatible index, next non-overlapping job, LIS with lower_bound, and chain problems.", [refs.advancedDp]),
+        questions: [q("Longest Increasing Subsequence", "LeetCode 300"), q("Russian Doll Envelopes", "LeetCode 354"), q("Maximum Length of Pair Chain", "LeetCode 646"), q("Longest String Chain", "LeetCode 1048"), q("Maximum Profit in Job Scheduling", "LeetCode 1235"), q("Number of Longest Increasing Subsequence", "LeetCode 673"), q("Minimum Number of Removals to Make Mountain Array", "LeetCode 1671"), q("Best Team With No Conflicts", "LeetCode 1626"), q("Delete and Earn", "LeetCode 740"), q("Make Array Strictly Increasing", "LeetCode 1187")],
+      },
+      {
+        name: "Monotonic queue DP",
+        theory: codeNote("Deque transition", "dp[i] = nums[i] + max(dp[j])\nwhere j is in range [i-k, i-1]\n\ndeque<int> dq;\n// keep best dp candidate at front", "Use deque instead of checking all previous k states.", [refs.advancedDp]),
+        questions: [q("Sliding Window Maximum", "LeetCode 239"), q("Jump Game VI", "LeetCode 1696"), q("Constrained Subsequence Sum", "LeetCode 1425"), q("Shortest Subarray with Sum at Least K", "LeetCode 862"), q("Maximum Number of Robots Within Budget", "LeetCode 2398"), q("Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit", "LeetCode 1438"), q("Delivering Boxes from Storage to Ports", "LeetCode 1687"), q("Jump Game VIII / variants", "CP-style")],
+      },
+      {
+        name: "Monotonic stack + DP",
+        theory: pattern("Use for contribution of each element, subarray minimum/maximum, nearest smaller/greater, and sum over all subarrays.", [refs.advancedDp]),
+        questions: [q("Sum of Subarray Minimums", "LeetCode 907"), q("Sum of Subarray Ranges", "LeetCode 2104"), q("Maximum Subarray Min-Product", "LeetCode 1856"), q("Total Strength of Wizards", "LeetCode 2281"), q("Count Submatrices With All Ones", "LeetCode 1504"), q("Largest Rectangle in Histogram", "LeetCode 84"), q("Maximal Rectangle", "LeetCode 85")],
+      },
+      {
+        name: "Divide and conquer DP optimization",
+        theory: pattern("Advanced CP-style optimization for partition transitions where the optimal split point is monotonic.", [refs.advancedDp]),
+        questions: [q("Divide and Conquer DP Optimization", "CP / GFG"), q("Ciel and Gondolas", "Codeforces"), q("Yet Another Minimization Problem", "Codeforces"), q("AtCoder DP Contest - Y / variants", "CP"), q("Partition Array Cost Problems", "CP"), q("Batch Scheduling / Group Partition DP", "CP")],
+      },
+      {
+        name: "Knuth optimization",
+        theory: pattern("Very advanced interval DP optimization. For placement, know the name only unless targeting CP-heavy roles.", [refs.advancedDp]),
+        questions: [q("Knuth Optimization", "CP / GFG"), q("Optimal Binary Search Tree", "GFG"), q("Matrix Chain Multiplication Optimized Variants", "CP"), q("Merge Stones", "LeetCode 1000"), q("Slimes", "AtCoder DP N"), q("File Merging", "SPOJ / BOJ")],
+      },
+      {
+        name: "Convex Hull Trick DP",
+        theory: pattern("Use when transitions look like dp[i] = min over j of m[j] * x[i] + b[j]. Each previous state creates a line.", [refs.advancedDp]),
+        questions: [q("Convex Hull Trick Basics", "CP / GFG"), q("Line Container Problems", "CP"), q("DP with Linear Functions", "CP"), q("Acquire", "USACO"), q("Commando", "SPOJ"), q("Gasoline DP variants", "CP")],
+      },
+      {
+        name: "Digit DP",
+        theory: pattern("Use when counting numbers from 1 to N or [L, R] with digit constraints. Common state: dp[index][tight][started][mask/sum/prev].", [refs.advancedDp]),
+        questions: [q("Count Numbers with Unique Digits", "LeetCode 357"), q("Numbers At Most N Given Digit Set", "LeetCode 902"), q("Count Special Integers", "LeetCode 2376"), q("Number of Digit One", "LeetCode 233"), q("Non-negative Integers without Consecutive Ones", "LeetCode 600"), q("Count of Integers", "LeetCode 2719"), q("Find All Good Strings", "LeetCode 1397"), q("Digit DP GFG Practice", "GFG")],
+      },
+      {
+        name: "DP on trees advanced",
+        theory: pattern("Use when answer at node depends on children, choosing/skipping node, rerooting, subtree contribution, or distance from every node.", [refs.advancedDp]),
+        questions: [q("House Robber III", "LeetCode 337"), q("Binary Tree Maximum Path Sum", "LeetCode 124"), q("Binary Tree Cameras", "LeetCode 968"), q("Distribute Coins in Binary Tree", "LeetCode 979"), q("Maximum Product of Splitted Binary Tree", "LeetCode 1339"), q("Sum of Distances in Tree", "LeetCode 834"), q("Minimum Height Trees", "LeetCode 310"), q("Count Nodes With the Highest Score", "LeetCode 2049"), q("Tree Matching", "CSES"), q("Tree Distances I / II", "CSES")],
+      },
+      {
+        name: "Rerooting DP",
+        theory: checkpoint("Two DFS approach", ["DFS 1: calculate subtree values.", "DFS 2: move root from parent to child and update answer.", "Use when answer is needed for every node as root."], [refs.advancedDp]),
+        questions: [q("Sum of Distances in Tree", "LeetCode 834"), q("Tree Distances II", "CSES"), q("Minimum Height Trees", "LeetCode 310"), q("Maximum Product of Splitted Binary Tree", "LeetCode 1339"), q("Tree Painting", "Codeforces"), q("Tree Matching", "CSES")],
+      },
+      {
+        name: "Bitmask DP optimization",
+        theory: codeNote("Submask iteration", "for (int sub = mask; sub; sub = (sub - 1) & mask) {\n    // iterate over all submasks of mask\n}", "Use when n <= 20 with visited/subset state, task assignment, team choice, or TSP-style problems.", [refs.advancedDp]),
+        questions: [q("Beautiful Arrangement", "LeetCode 526"), q("Can I Win", "LeetCode 464"), q("Partition to K Equal Sum Subsets", "LeetCode 698"), q("Matchsticks to Square", "LeetCode 473"), q("Shortest Path Visiting All Nodes", "LeetCode 847"), q("Smallest Sufficient Team", "LeetCode 1125"), q("Maximum Students Taking Exam", "LeetCode 1349"), q("Number of Ways to Wear Different Hats to Each Other", "LeetCode 1434"), q("Minimum XOR Sum of Two Arrays", "LeetCode 1879"), q("Minimum Cost to Connect Two Groups of Points", "LeetCode 1595")],
+      },
+      {
+        name: "SOS DP",
+        theory: pattern("Very advanced. Use when needing sum over all submasks or answers for every mask faster than O(3^n). For normal placement, skip.", [refs.advancedDp]),
+        questions: [q("SOS DP Basics", "CP"), q("Bitmask Subset Sum Queries", "CP"), q("Compatible Numbers", "Codeforces"), q("Maximum AND/OR subset variants", "CP"), q("Count Pairs With OR/AND Conditions", "CP")],
+      },
+      {
+        name: "DP with matrix exponentiation",
+        theory: pattern("Use for linear recurrence, extremely large n, same transition repeated many times, and O(log n) transition power.", [refs.advancedDp]),
+        questions: [q("Fibonacci using Matrix Exponentiation", "GFG"), q("Climbing Stairs with Very Large N", "GFG"), q("Count Vowel Permutation", "LeetCode 1220"), q("Student Attendance Record II", "LeetCode 552"), q("Knight Dialer", "LeetCode 935"), q("Number of Ways to Stay in Same Place After Some Steps", "LeetCode 1269")],
+      },
+      {
+        name: "DP with segment tree / Fenwick tree",
+        theory: pattern("Use when you need best dp value in a value range, prefix maximum/minimum, compressible values, or LIS variants with constraints.", [refs.advancedDp]),
+        questions: [q("Longest Increasing Subsequence II", "LeetCode 2407"), q("Count of Smaller Numbers After Self", "LeetCode 315"), q("Count Number of Teams", "LeetCode 1395"), q("Create Sorted Array through Instructions", "LeetCode 1649"), q("Maximum Balanced Subsequence Sum", "LeetCode 2926"), q("Russian Doll Envelopes", "LeetCode 354"), q("Best Team With No Conflicts", "LeetCode 1626")],
+      },
+      {
+        name: "DP with monotonic optimization over intervals",
+        theory: pattern("Use normal interval DP first. Optimization depends on recurrence and appears mostly in CP.", [refs.advancedDp]),
+        questions: [q("Slimes", "AtCoder DP N"), q("Merge Stones", "LeetCode 1000"), q("Minimum Cost to Cut a Stick", "LeetCode 1547"), q("Burst Balloons", "LeetCode 312"), q("Strange Printer", "LeetCode 664"), q("Remove Boxes", "LeetCode 546")],
+      },
+      {
+        name: "Minimum target",
+        theory: [
+          { title: "Goal", type: "notes", description: "For Advanced DP Optimization, solve around 30-45 questions.", points: ["Partition Equal Subset Sum", "Coin Change II", "Longest Common Subsequence", "Edit Distance", "Longest Increasing Subsequence", "Russian Doll Envelopes", "Maximum Profit in Job Scheduling", "Jump Game VI", "Constrained Subsequence Sum", "Shortest Subarray with Sum at Least K", "Sum of Subarray Minimums", "Maximum Subarray Min-Product", "Total Strength of Wizards", "Longest Increasing Subsequence II", "Maximum Balanced Subsequence Sum", "Count Special Integers", "Numbers At Most N Given Digit Set", "Non-negative Integers without Consecutive Ones", "Sum of Distances in Tree", "Tree Distances II", "Shortest Path Visiting All Nodes", "Smallest Sufficient Team", "Minimum XOR Sum of Two Arrays", "Number of Ways to Wear Different Hats to Each Other", "Count Vowel Permutation", "Student Attendance Record II", "Knight Dialer", "Merge Stones", "Slimes", "Minimum Cost to Cut a Stick"], references: [refs.advancedDp] },
+          { title: "Placement priority", type: "notes", points: ["Space optimization", "DP + binary search", "Monotonic queue DP", "Digit DP basics", "Rerooting DP basics", "Bitmask DP", "DP with segment tree/Fenwick"], references: [refs.advancedDp] },
+        ],
+        questions: [],
+      },
+    ],
+  },
+  {
+    topic: "Advanced String Algorithms",
+    subtopics: [
+      {
+        name: "Checkpoint 0: Prerequisites",
+        theory: checkpoint("Before advanced strings, know", ["frequency array", "hashmap for chars", "two pointer palindrome", "sliding window", "Trie", "LCS / Edit Distance", "basic substring search"], [refs.advancedStrings]),
+        questions: [],
+      },
+      {
+        name: "Basic pattern matching",
+        theory: pattern("Use pattern matching for find pattern, substring search, first occurrence, repeated pattern, and string rotation.", [refs.advancedStrings]),
+        questions: [q("Find the Index of the First Occurrence in a String", "LeetCode 28"), q("Repeated Substring Pattern", "LeetCode 459"), q("Rotate String", "LeetCode 796"), q("Repeated String Match", "LeetCode 686"), q("Minimum Repeated String Match", "GFG"), q("Implement strstr", "GFG"), q("Pattern Searching", "GFG")],
+      },
+      {
+        name: "KMP Algorithm",
+        theory: checkpoint("KMP theory checkpoint", ["KMP runs in O(n + m).", "LPS[i] = length of longest proper prefix which is also suffix.", "Use when brute force O(n*m) may fail or longest prefix=suffix is needed."], [refs.advancedStrings]),
+        questions: [q("KMP Algorithm Implementation", "GFG"), q("Find First Occurrence in a String", "LeetCode 28"), q("Repeated Substring Pattern", "LeetCode 459"), q("Longest Happy Prefix", "LeetCode 1392"), q("Shortest Palindrome", "LeetCode 214"), q("Minimum Characters to Add at Front for Palindrome", "GFG"), q("Find All Occurrences of Pattern", "GFG"), q("String Matching in an Array", "LeetCode 1408")],
+      },
+      {
+        name: "LPS-based problems",
+        theory: pattern("If the problem asks for prefix also suffix, border of string, period of string, or repeated pattern, think LPS array.", [refs.advancedStrings]),
+        questions: [q("Longest Happy Prefix", "LeetCode 1392"), q("Repeated Substring Pattern", "LeetCode 459"), q("Shortest Palindrome", "LeetCode 214"), q("Minimum Characters to Add at Front for Palindrome", "GFG"), q("Find the String with LCP", "LeetCode 2573"), q("Finding Borders", "CSES"), q("Finding Periods", "CSES")],
+      },
+      {
+        name: "Z Algorithm",
+        theory: pattern("Z[i] is the length of the longest substring starting at i that is also a prefix. For pattern matching, build pattern + '$' + text.", [refs.advancedStrings]),
+        questions: [q("Z Algorithm Implementation", "GFG"), q("Find Pattern in String", "GFG"), q("Longest Happy Prefix", "LeetCode 1392"), q("Minimum Characters to Add at Front for Palindrome", "GFG"), q("Shortest Palindrome", "LeetCode 214"), q("Finding Borders", "CSES"), q("String Matching", "CSES"), q("Search Pattern", "GFG")],
+      },
+      {
+        name: "KMP vs Z Algorithm",
+        theory: checkpoint("Which one to prefer", ["Direct substring search: KMP or Z", "Prefix-suffix / border: KMP or Z", "Easier implementation for pattern search: Z", "Classic interview expectation: KMP", "Repeated substring pattern: KMP", "Matching prefix at every index: Z"], [refs.advancedStrings]),
+        questions: [],
+      },
+      {
+        name: "Rabin-Karp / Rolling Hash",
+        theory: pattern("Use rolling hash for many substring comparisons, duplicate substring search, binary search on answer length, substring equality queries, and palindrome substring queries.", [refs.advancedStrings]),
+        questions: [q("Rabin-Karp Algorithm", "GFG"), q("Repeated DNA Sequences", "LeetCode 187"), q("Longest Duplicate Substring", "LeetCode 1044"), q("Distinct Echo Substrings", "LeetCode 1316"), q("Find Substring With Given Hash Value", "LeetCode 2156"), q("Longest Common Subpath", "LeetCode 1923"), q("Shortest Palindrome", "LeetCode 214"), q("String Matching", "CSES"), q("Pattern Positions", "CSES-style"), q("Palindrome Queries", "GFG")],
+      },
+      {
+        name: "Double Hashing",
+        theory: pattern("Use two mod values and store (hash1, hash2) when collision risk matters for hard string hashing and many substring comparisons.", [refs.advancedStrings]),
+        questions: [q("Longest Duplicate Substring", "LeetCode 1044"), q("Distinct Echo Substrings", "LeetCode 1316"), q("Longest Common Subpath", "LeetCode 1923"), q("Palindrome Queries", "GFG"), q("Substring Equality Queries", "CSES / CP")],
+      },
+      {
+        name: "Binary search + rolling hash",
+        theory: pattern("When the question asks for the longest substring satisfying a condition, binary search the length and check with rolling hash.", [refs.advancedStrings]),
+        questions: [q("Longest Duplicate Substring", "LeetCode 1044"), q("Longest Common Subpath", "LeetCode 1923"), q("Longest Repeating Substring", "GFG"), q("Longest Common Substring", "GFG"), q("Distinct Echo Substrings", "LeetCode 1316")],
+      },
+      {
+        name: "Manacher Algorithm",
+        theory: pattern("Manacher finds palindrome radii in O(n). For normal placement, expand-around-center is usually enough; Manacher is CP-level.", [refs.advancedStrings]),
+        questions: [q("Manacher Algorithm", "GFG"), q("Longest Palindromic Substring", "LeetCode 5"), q("Palindromic Substrings", "LeetCode 647"), q("Shortest Palindrome", "LeetCode 214"), q("Palindrome Queries", "GFG"), q("Count Palindromic Substrings", "GFG"), q("Longest Palindromic Prefix", "GFG")],
+      },
+      {
+        name: "Suffix Array",
+        theory: pattern("Use suffix array to sort all suffixes, count distinct substrings, find longest repeated substring, kth lexicographic substring, or answer many pattern queries.", [refs.advancedStrings]),
+        questions: [q("Suffix Array Construction", "CSES / CP"), q("String Matching", "CSES"), q("Finding Borders", "CSES"), q("Finding Periods", "CSES"), q("Distinct Substrings", "CSES"), q("Longest Repeated Substring", "GFG"), q("Longest Duplicate Substring", "LeetCode 1044"), q("Longest Common Substring", "GFG"), q("Refrain", "Codeforces / CP"), q("Substring Order I / II", "CSES")],
+      },
+      {
+        name: "LCP Array",
+        theory: pattern("LCP stores longest common prefix between adjacent suffixes. Distinct substrings = n*(n+1)/2 - sum(LCP).", [refs.advancedStrings]),
+        questions: [q("LCP Array Construction", "GFG / CP"), q("Distinct Substrings", "CSES"), q("Longest Repeated Substring", "GFG"), q("Longest Duplicate Substring", "LeetCode 1044"), q("Longest Common Substring", "GFG"), q("Refrain", "Codeforces")],
+      },
+      {
+        name: "Suffix Automaton",
+        theory: pattern("Very advanced CP topic for many substring-related queries, count distinct substrings, longest common substring, and online string construction.", [refs.advancedStrings]),
+        questions: [q("Suffix Automaton Basics", "CP"), q("Count Distinct Substrings", "CP"), q("Longest Common Substring", "CP"), q("Number of Different Substrings", "CP"), q("K-th Lexicographic Substring", "CP"), q("Refrain", "Codeforces"), q("Substring Queries", "CP")],
+      },
+      {
+        name: "Aho-Corasick Algorithm",
+        theory: pattern("Aho-Corasick is Trie + KMP for searching many patterns in one text efficiently. For normal placement, Trie is enough.", [refs.advancedStrings]),
+        questions: [q("Aho-Corasick Algorithm", "GFG / CP"), q("Multi-pattern String Matching", "CP"), q("Stream of Characters", "LeetCode 1032"), q("Word Search II", "LeetCode 212"), q("Forbidden Patterns DP", "CP"), q("Find All Good Strings", "LeetCode 1397"), q("Pattern Matching Set", "CP")],
+      },
+      {
+        name: "Palindrome advanced patterns",
+        theory: checkpoint("Technique chooser", ["Longest palindromic substring: expand center / Manacher", "Count palindromic substrings: expand center / DP / Manacher", "Palindrome subsequence: DP", "Palindrome partition: Backtracking / DP", "Shortest palindrome: KMP / Rolling hash", "Palindrome pairs: Trie / Hashing"], [refs.advancedStrings]),
+        questions: [q("Longest Palindromic Substring", "LeetCode 5"), q("Palindromic Substrings", "LeetCode 647"), q("Shortest Palindrome", "LeetCode 214"), q("Longest Palindromic Subsequence", "LeetCode 516"), q("Palindrome Partitioning II", "LeetCode 132"), q("Count Different Palindromic Subsequences", "LeetCode 730"), q("Palindrome Pairs", "LeetCode 336"), q("Maximum Product of the Length of Two Palindromic Subsequences", "LeetCode 2002")],
+      },
+      {
+        name: "Advanced string DP",
+        theory: pattern("Use string DP for two strings, pattern matching, subsequence count, wildcard, regex, partitions, and palindromic subsequence.", [refs.advancedStrings]),
+        questions: [q("Longest Common Subsequence", "LeetCode 1143"), q("Edit Distance", "LeetCode 72"), q("Distinct Subsequences", "LeetCode 115"), q("Regular Expression Matching", "LeetCode 10"), q("Wildcard Matching", "LeetCode 44"), q("Interleaving String", "LeetCode 97"), q("Scramble String", "LeetCode 87"), q("Strange Printer", "LeetCode 664"), q("Count Different Palindromic Subsequences", "LeetCode 730"), q("Find All Good Strings", "LeetCode 1397")],
+      },
+      {
+        name: "Minimum target",
+        theory: [
+          { title: "Goal", type: "notes", description: "For Advanced String Algorithms, solve around 30-45 questions.", points: ["Find First Occurrence in a String", "Repeated Substring Pattern", "Rotate String", "Repeated String Match", "Longest Happy Prefix", "Shortest Palindrome", "Minimum Characters to Add at Front for Palindrome", "KMP Algorithm", "Z Algorithm", "Rabin-Karp Algorithm", "Repeated DNA Sequences", "Longest Duplicate Substring", "Distinct Echo Substrings", "Find Substring With Given Hash Value", "Longest Common Subpath", "Longest Palindromic Substring", "Palindromic Substrings", "Manacher Algorithm", "String Matching", "Finding Borders", "Finding Periods", "Distinct Substrings", "Stream of Characters", "Find All Good Strings", "Regular Expression Matching", "Wildcard Matching", "Strange Printer", "Count Different Palindromic Subsequences"], references: [refs.advancedStrings] },
+          { title: "Placement priority", type: "notes", points: ["KMP", "Z Algorithm", "Rolling Hash basics", "Longest Duplicate Substring", "Shortest Palindrome", "Manacher basics", "Palindrome DP", "Regex / Wildcard DP basics"], references: [refs.advancedStrings] },
+        ],
+        questions: [],
+      },
+    ],
+  },
+  {
+    topic: "Competitive Programming Miscellaneous Patterns",
+    subtopics: [
+      {
+        name: "Coordinate compression",
+        theory: pattern("Use when values or coordinates are huge but only relative order matters, especially with Fenwick/Segment Tree.", [refs.cpMisc]),
+        questions: [q("Coordinate Compression", "GFG"), q("Count Inversions", "GFG"), q("Count of Smaller Numbers After Self", "LeetCode 315"), q("Reverse Pairs", "LeetCode 493"), q("Create Sorted Array through Instructions", "LeetCode 1649"), q("Falling Squares", "LeetCode 699"), q("My Calendar III", "LeetCode 732"), q("Range Sum Query Mutable variants", "CSES/GFG")],
+      },
+      {
+        name: "Sweep line advanced",
+        theory: pattern("Use sweep line for event start/end, max overlap, active intervals, rectangle union area, and timeline processing.", [refs.cpMisc]),
+        questions: [q("Meeting Rooms II", "LeetCode 253"), q("Minimum Platforms", "GFG"), q("My Calendar III", "LeetCode 732"), q("Number of Flowers in Full Bloom", "LeetCode 2251"), q("Describe the Painting", "LeetCode 1943"), q("The Skyline Problem", "LeetCode 218"), q("Rectangle Area II", "LeetCode 850"), q("Perfect Rectangle", "LeetCode 391")],
+      },
+      {
+        name: "Meet in the Middle",
+        theory: pattern("Use when n is around 30-40 and 2^n is too large. Split into two halves to get O(2^(n/2)).", [refs.cpMisc]),
+        questions: [q("Meet in the Middle Basics", "GFG"), q("Partition Array Into Two Arrays to Minimize Sum Difference", "LeetCode 2035"), q("Closest Subsequence Sum", "LeetCode 1755"), q("Split Array With Same Average", "LeetCode 805"), q("Minimum Difference Subsets", "GFG"), q("Subset Sum with n up to 40", "CP/GFG"), q("Maximum Subsequence Sum Modulo M", "HackerRank")],
+      },
+      {
+        name: "Offline queries",
+        theory: pattern("Use when many queries can be sorted/reordered and dynamic online processing is hard.", [refs.cpMisc]),
+        questions: [q("Checking Existence of Edge Length Limited Paths", "LeetCode 1697"), q("Number of Flowers in Full Bloom", "LeetCode 2251"), q("Minimum Interval to Include Each Query", "LeetCode 1851"), q("Count of Smaller Numbers After Self", "LeetCode 315"), q("Reverse Pairs", "LeetCode 493"), q("Distinct Values Queries", "CSES"), q("Powerful Array", "Codeforces")],
+      },
+      {
+        name: "Mo's Algorithm",
+        theory: pattern("Use for many offline range queries on a static array when you can add/remove one element from the current range.", [refs.cpMisc]),
+        questions: [q("Mo's Algorithm Basics", "GFG"), q("Distinct Values Queries", "CSES"), q("Powerful Array", "Codeforces"), q("D-query", "SPOJ"), q("Range Frequency Queries", "CP"), q("Count Distinct in Range", "GFG"), q("Query Square Root Decomposition", "GFG")],
+      },
+      {
+        name: "Square root decomposition",
+        theory: pattern("Split array into sqrt(n) blocks and precompute block answers for range query/update problems.", [refs.cpMisc]),
+        questions: [q("Sqrt Decomposition Basics", "GFG"), q("Range Sum Query using Sqrt Decomposition", "GFG"), q("Range Minimum Query using Sqrt Decomposition", "GFG"), q("Dynamic Range Sum Queries", "CSES"), q("Range Update Queries", "GFG"), q("Query Blocks Problems", "CP")],
+      },
+      {
+        name: "Policy Based Data Structure / Ordered Set",
+        theory: pattern("PBDS supports kth smallest and count of elements smaller than x. Works on GNU C++ platforms, not everywhere.", [refs.cpMisc]),
+        questions: [q("Ordered Set Basics", "Codeforces/GFG"), q("Count Inversions", "GFG"), q("Count of Smaller Numbers After Self", "LeetCode 315"), q("Sliding Window Median", "LeetCode 480"), q("Josephus Problem II", "CSES"), q("List Removals", "CSES"), q("Order Statistic Tree Problems", "GFG")],
+      },
+      {
+        name: "Difference constraints",
+        theory: pattern("Model inequalities like x - y <= c as graph edges. Negative cycle means impossible.", [refs.cpMisc]),
+        questions: [q("Difference Constraints Basics", "CP/GFG"), q("Bellman-Ford Difference Constraints", "GFG"), q("Systems of Inequalities", "CP"), q("Scheduling with Constraints", "CP"), q("Currency Arbitrage", "GFG")],
+      },
+      {
+        name: "Randomization / hashing tricks",
+        theory: pattern("Use hashing/randomization to compare large objects quickly, avoid full structures, random pick, weighted random, and duplicate substring detection.", [refs.cpMisc]),
+        questions: [q("Random Pick with Weight", "LeetCode 528"), q("Insert Delete GetRandom O(1)", "LeetCode 380"), q("Shuffle an Array", "LeetCode 384"), q("Random Pick Index", "LeetCode 398"), q("Longest Duplicate Substring", "LeetCode 1044"), q("Repeated DNA Sequences", "LeetCode 187"), q("Subtree Hashing Problems", "CP")],
+      },
+      {
+        name: "Game theory",
+        theory: pattern("Use game DP for two-player optimal play, turn-based win/lose states, and moves that force opponent loss.", [refs.cpMisc]),
+        questions: [q("Nim Game", "LeetCode 292"), q("Divisor Game", "LeetCode 1025"), q("Stone Game", "LeetCode 877"), q("Predict the Winner", "LeetCode 486"), q("Can I Win", "LeetCode 464"), q("Stone Game II", "LeetCode 1140"), q("Stone Game III", "LeetCode 1406"), q("Stone Game IV", "LeetCode 1510"), q("Cat and Mouse", "LeetCode 913")],
+      },
+      {
+        name: "Bitset optimization",
+        theory: codeNote("Subset sum bitset", "bitset<100001> dp;\ndp[0] = 1;\n\nfor (int x : nums) {\n    dp |= (dp << x);\n}", "Use for boolean DP and subset sum when n * sum is large but manageable with bit operations.", [refs.cpMisc]),
+        questions: [q("Subset Sum using Bitset", "GFG"), q("Partition Equal Subset Sum", "LeetCode 416"), q("Minimum Subset Sum Difference", "GFG"), q("Bitset DP Problems", "CP"), q("Knapsack with Bitset", "CP")],
+      },
+      {
+        name: "Greedy with exchange argument",
+        theory: pattern("Use exchange argument to prove a local greedy choice is globally safe by replacing an optimal choice without making the answer worse.", [refs.cpMisc]),
+        questions: [q("Activity Selection", "GFG"), q("Non-overlapping Intervals", "LeetCode 435"), q("Minimum Number of Arrows to Burst Balloons", "LeetCode 452"), q("Course Schedule III", "LeetCode 630"), q("IPO", "LeetCode 502"), q("Maximum Performance of a Team", "LeetCode 1383"), q("Candy", "LeetCode 135"), q("Gas Station", "LeetCode 134")],
+      },
+      {
+        name: "Invariant-based problems",
+        theory: pattern("Use invariant thinking when operations change many things, simulation is too large, or a hidden quantity remains unchanged.", [refs.cpMisc]),
+        questions: [q("Bulb Switcher", "LeetCode 319"), q("Nim Game", "LeetCode 292"), q("Minimum Moves to Equal Array Elements", "LeetCode 453"), q("Minimum Moves to Equal Array Elements II", "LeetCode 462"), q("Gas Station", "LeetCode 134"), q("Jump Game", "LeetCode 55"), q("Broken Calculator", "LeetCode 991")],
+      },
+      {
+        name: "Constructive algorithms",
+        theory: pattern("Use constructive thinking when many valid answers exist and you need to build any answer that satisfies conditions.", [refs.cpMisc]),
+        questions: [q("Construct the Array", "GFG"), q("Beautiful Array", "LeetCode 932"), q("Construct Target Array With Multiple Sums", "LeetCode 1354"), q("Construct K Palindrome Strings", "LeetCode 1400"), q("Construct Smallest Number From DI String", "LeetCode 2375"), q("Restore IP Addresses", "LeetCode 93"), q("Reconstruct Itinerary", "LeetCode 332"), q("Queue Reconstruction by Height", "LeetCode 406")],
+      },
+      {
+        name: "Interactive / query-style thinking",
+        theory: pattern("Use when hidden values and limited query calls require minimizing calls, usually with binary search or divide and conquer.", [refs.cpMisc]),
+        questions: [q("Guess Number Higher or Lower", "LeetCode 374"), q("First Bad Version", "LeetCode 278"), q("Find in Mountain Array", "LeetCode 1095"), q("Binary Search Interactive Basics", "CP"), q("Query Optimization Problems", "CP")],
+      },
+      {
+        name: "Minimum target",
+        theory: [
+          { title: "Goal", type: "notes", description: "For CP miscellaneous, solve around 35-50 questions.", points: ["Count Inversions", "Count of Smaller Numbers After Self", "Reverse Pairs", "Falling Squares", "My Calendar III", "The Skyline Problem", "Rectangle Area II", "Partition Array Into Two Arrays to Minimize Sum Difference", "Closest Subsequence Sum", "Split Array With Same Average", "Checking Existence of Edge Length Limited Paths", "Minimum Interval to Include Each Query", "Distinct Values Queries", "Josephus Problem II", "Sliding Window Median", "Nim Game", "Stone Game II", "Can I Win", "Partition Equal Subset Sum using Bitset", "Beautiful Array", "Construct Target Array With Multiple Sums", "Queue Reconstruction by Height", "Bulb Switcher", "Gas Station", "Course Schedule III"], references: [refs.cpMisc] },
+          { title: "Placement priority", type: "notes", points: ["Coordinate compression", "Sweep line", "Meet in the Middle basics", "Offline queries with sorting", "PBDS idea", "Bitset subset sum", "Game theory basics", "Greedy proof / exchange argument"], references: [refs.cpMisc] },
+        ],
+        questions: [],
+      },
+    ],
+  },
+  {
+    topic: "OA Revision Sets by Company Pattern",
+    subtopics: [
+      {
+        name: "Easy-Medium OA pattern",
+        theory: checkpoint("Common in", ["TCS", "Infosys", "Accenture", "Cognizant", "Capgemini", "Wipro", "Deloitte"], [refs.revision]),
+        questions: [q("Two Sum", "LeetCode 1"), q("Contains Duplicate", "LeetCode 217"), q("Valid Anagram", "LeetCode 242"), q("Majority Element", "LeetCode 169"), q("Move Zeroes", "LeetCode 283"), q("Missing Number", "LeetCode 268"), q("Best Time to Buy and Sell Stock", "LeetCode 121"), q("Valid Palindrome", "LeetCode 125"), q("Reverse Integer", "LeetCode 7"), q("Roman to Integer", "LeetCode 13"), q("Merge Two Sorted Lists", "LeetCode 21"), q("Valid Parentheses", "LeetCode 20"), q("Maximum Subarray", "LeetCode 53"), q("Climbing Stairs", "LeetCode 70"), q("Binary Search", "LeetCode 704")],
+      },
+      {
+        name: "Product-based OA pattern",
+        theory: checkpoint("Common in", ["Amazon", "Microsoft", "Adobe", "Intuit", "Salesforce", "Oracle", "Atlassian", "Walmart", "Cisco", "Visa"], [refs.revision]),
+        questions: [q("Subarray Sum Equals K", "LeetCode 560"), q("Longest Substring Without Repeating Characters", "LeetCode 3"), q("Minimum Window Substring", "LeetCode 76"), q("3Sum", "LeetCode 15"), q("Merge Intervals", "LeetCode 56"), q("Meeting Rooms II", "LeetCode 253 / GFG"), q("Koko Eating Bananas", "LeetCode 875"), q("Capacity To Ship Packages Within D Days", "LeetCode 1011"), q("Top K Frequent Elements", "LeetCode 347"), q("Task Scheduler", "LeetCode 621"), q("Daily Temperatures", "LeetCode 739"), q("Largest Rectangle in Histogram", "LeetCode 84"), q("Number of Islands", "LeetCode 200"), q("Rotting Oranges", "LeetCode 994"), q("Course Schedule", "LeetCode 207"), q("Coin Change", "LeetCode 322"), q("Longest Increasing Subsequence", "LeetCode 300"), q("Word Break", "LeetCode 139")],
+      },
+      {
+        name: "CP-style OA pattern",
+        theory: checkpoint("Common in", ["Google", "Uber", "DE Shaw", "Tower Research", "Rubrik", "Media.net", "Sprinklr", "Goldman Sachs hard rounds", "CodeNation"], [refs.revision]),
+        questions: [q("Aggressive Cows", "GFG / SPOJ"), q("Magnetic Force Between Two Balls", "LeetCode 1552"), q("Split Array Largest Sum", "LeetCode 410"), q("Minimum Time to Complete Trips", "LeetCode 2187"), q("Reverse Pairs", "LeetCode 493"), q("Count of Smaller Numbers After Self", "LeetCode 315"), q("Count of Range Sum", "LeetCode 327"), q("Shortest Path Visiting All Nodes", "LeetCode 847"), q("Minimum Cost to Make at Least One Valid Path in a Grid", "LeetCode 1368"), q("Swim in Rising Water", "LeetCode 778"), q("Critical Connections in a Network", "LeetCode 1192"), q("Bricks Falling When Hit", "LeetCode 803"), q("Partition to K Equal Sum Subsets", "LeetCode 698"), q("Smallest Sufficient Team", "LeetCode 1125"), q("Longest Duplicate Substring", "LeetCode 1044"), q("Maximum XOR With an Element From Array", "LeetCode 1707")],
+      },
+      {
+        name: "Startup-style OA pattern",
+        theory: checkpoint("Common in", ["Zomato", "Swiggy", "Meesho", "Razorpay", "PhonePe", "Groww", "CRED", "Small product startups"], [refs.revision]),
+        questions: [q("LRU Cache", "LeetCode 146"), q("Insert Delete GetRandom O(1)", "LeetCode 380"), q("Time Based Key-Value Store", "LeetCode 981"), q("Snapshot Array", "LeetCode 1146"), q("Design Underground System", "LeetCode 1396"), q("Design Browser History", "LeetCode 1472"), q("My Calendar I", "LeetCode 729"), q("My Calendar II", "LeetCode 731"), q("My Calendar III", "LeetCode 732"), q("Alert Using Same Key-Card Three or More Times", "LeetCode 1604"), q("Invalid Transactions", "LeetCode 1169"), q("Single-Threaded CPU", "LeetCode 1834"), q("Process Tasks Using Servers", "LeetCode 1882"), q("Meeting Rooms III", "LeetCode 2402")],
+      },
+      {
+        name: "Cisco / networking-company OA style",
+        theory: checkpoint("Common patterns", ["Arrays", "Strings", "Hashing", "Sorting", "Simulation", "Stack", "Queue", "Graphs basics", "Implementation-heavy logic"], [refs.revision]),
+        questions: [q("Two Sum", "LeetCode 1"), q("Valid Anagram", "LeetCode 242"), q("Group Anagrams", "LeetCode 49"), q("Longest Consecutive Sequence", "LeetCode 128"), q("Merge Intervals", "LeetCode 56"), q("Insert Interval", "LeetCode 57"), q("String Compression", "LeetCode 443"), q("Compare Version Numbers", "LeetCode 165"), q("Decode String", "LeetCode 394"), q("Valid Parentheses", "LeetCode 20"), q("Min Stack", "LeetCode 155"), q("Rotting Oranges", "LeetCode 994"), q("Number of Islands", "LeetCode 200"), q("Course Schedule", "LeetCode 207"), q("Top K Frequent Elements", "LeetCode 347"), q("Task Scheduler", "LeetCode 621"), q("Kth Largest Element in an Array", "LeetCode 215"), q("Find Median from Data Stream", "LeetCode 295")],
+      },
+      {
+        name: "Finance-company OA style",
+        theory: checkpoint("Common in", ["Goldman Sachs", "JPMorgan", "Morgan Stanley", "Barclays", "BNY", "Wells Fargo"], [refs.revision]),
+        questions: [q("Best Time to Buy and Sell Stock", "LeetCode 121"), q("Best Time to Buy and Sell Stock II", "LeetCode 122"), q("Maximum Subarray", "LeetCode 53"), q("Subarray Sum Equals K", "LeetCode 560"), q("Merge Intervals", "LeetCode 56"), q("Non-overlapping Intervals", "LeetCode 435"), q("Meeting Rooms II", "LeetCode 253"), q("Coin Change", "LeetCode 322"), q("House Robber", "LeetCode 198"), q("Longest Increasing Subsequence", "LeetCode 300"), q("Number of Islands", "LeetCode 200"), q("Course Schedule", "LeetCode 207"), q("LRU Cache", "LeetCode 146"), q("Design Underground System", "LeetCode 1396")],
+      },
+      {
+        name: "Final OA mock set pattern",
+        theory: checkpoint("Mock format", ["1 easy", "2 medium", "1 hard/medium-hard", "Do one mixed mock, then review mistakes and rewrite failed solutions."], [refs.revision]),
+        questions: [q("Two Sum"), q("Longest Substring Without Repeating Characters"), q("Merge Intervals"), q("Coin Change"), q("Maximum Average Subarray I"), q("Subarray Sum Equals K"), q("Minimum Window Substring"), q("Subarrays with K Different Integers"), q("Binary Search"), q("Koko Eating Bananas"), q("Capacity To Ship Packages Within D Days"), q("Split Array Largest Sum"), q("Kth Largest Element in an Array"), q("Top K Frequent Elements"), q("Task Scheduler"), q("Single-Threaded CPU"), q("Find if Path Exists in Graph"), q("Number of Islands"), q("Rotting Oranges"), q("Course Schedule"), q("Climbing Stairs"), q("House Robber"), q("Longest Increasing Subsequence"), q("Aggressive Cows"), q("Reverse Pairs"), q("Swim in Rising Water"), q("Partition to K Equal Sum Subsets")],
+      },
+      {
+        name: "30-day OA revision plan",
+        theory: [
+          { title: "Days 1-5: Array/String/Hashing", type: "notes", points: ["Two Sum", "Group Anagrams", "Longest Consecutive Sequence", "Subarray Sum Equals K", "Minimum Window Substring"], references: [refs.revision] },
+          { title: "Days 6-10: Binary Search + Greedy", type: "notes", points: ["Koko Eating Bananas", "Ship Packages", "Split Array Largest Sum", "Jump Game", "Gas Station"], references: [refs.revision] },
+          { title: "Days 11-15: Stack + Heap", type: "notes", points: ["Daily Temperatures", "Largest Rectangle", "Sliding Window Maximum", "Top K Frequent", "Task Scheduler"], references: [refs.revision] },
+          { title: "Days 16-20: Graph", type: "notes", points: ["Number of Islands", "Rotting Oranges", "Course Schedule", "Dijkstra", "DSU"], references: [refs.revision] },
+          { title: "Days 21-30: DP + mixed mock", type: "notes", points: ["House Robber", "Coin Change", "LCS", "LIS", "Partition Equal Subset Sum", "1 full mock daily", "review mistakes", "rewrite failed solutions"], references: [refs.revision] },
+        ],
+        questions: [],
+      },
+      {
+        name: "Final OA checklist",
+        theory: [
+          { title: "Patterns to revise before any OA", type: "notes", points: ["Prefix sum + hashmap", "Sliding window", "Binary search on answer", "Sorting + intervals", "Heap scheduling", "Monotonic stack", "Grid BFS", "Topological sort", "DSU", "Dijkstra", "1D DP", "Knapsack DP", "LIS", "Bitmask basics"], references: [refs.revision] },
+          { title: "Most important final 25", type: "notes", points: ["Two Sum", "Group Anagrams", "Longest Consecutive Sequence", "Subarray Sum Equals K", "Subarray Sums Divisible by K", "Longest Substring Without Repeating Characters", "Minimum Window Substring", "3Sum", "Merge Intervals", "Meeting Rooms II", "Koko Eating Bananas", "Ship Packages Within D Days", "Top K Frequent Elements", "Task Scheduler", "Daily Temperatures", "Largest Rectangle in Histogram", "Sliding Window Maximum", "Number of Islands", "Rotting Oranges", "Course Schedule", "Network Delay Time", "Coin Change", "Longest Increasing Subsequence", "Partition Equal Subset Sum", "LRU Cache"], references: [refs.revision] },
+        ],
+        questions: [],
+      },
+    ],
+  },
+  {
+    topic: "Interview Revision Set Pattern-wise",
+    subtopics: [
+      {
+        name: "Checkpoint 0: Interview mindset",
+        theory: checkpoint("Interview checks", ["Can you identify the pattern?", "Can you explain brute force?", "Can you optimize step by step?", "Can you write clean code?", "Can you handle edge cases?", "Can you dry run?"], [refs.revision]),
+        questions: [],
+      },
+      {
+        name: "Array + Hashing interview set",
+        theory: checkpoint("Must know patterns", ["frequency map", "prefix sum hashmap", "index marking", "Kadane", "Boyer Moore", "prefix/suffix product"], [refs.revision]),
+        questions: [q("Two Sum"), q("Contains Duplicate"), q("Majority Element"), q("Maximum Subarray"), q("Product of Array Except Self"), q("Longest Consecutive Sequence"), q("Subarray Sum Equals K"), q("Subarray Sums Divisible by K"), q("First Missing Positive"), q("Find All Duplicates in an Array")],
+      },
+      {
+        name: "Two Pointer interview set",
+        theory: checkpoint("Must know", ["opposite pointer", "slow-fast pointer", "Dutch National Flag", "sorted pair/triplet", "water trapping"], [refs.revision]),
+        questions: [q("Valid Palindrome"), q("Two Sum II"), q("3Sum"), q("Container With Most Water"), q("Trapping Rain Water"), q("Sort Colors"), q("Remove Duplicates from Sorted Array"), q("Move Zeroes"), q("Merge Sorted Array"), q("Squares of a Sorted Array")],
+      },
+      {
+        name: "Sliding Window interview set",
+        theory: checkpoint("Must know", ["fixed window", "variable window", "at most K", "exactly K = atMost(K) - atMost(K-1)", "frequency window", "minimum valid window"], [refs.revision]),
+        questions: [q("Maximum Average Subarray I"), q("Longest Substring Without Repeating Characters"), q("Minimum Window Substring"), q("Permutation in String"), q("Find All Anagrams in a String"), q("Longest Repeating Character Replacement"), q("Max Consecutive Ones III"), q("Fruit Into Baskets"), q("Subarrays with K Different Integers"), q("Minimum Size Subarray Sum")],
+      },
+      {
+        name: "Binary Search interview set",
+        theory: checkpoint("Must know", ["lower_bound", "upper_bound", "first true", "last false", "rotated binary search", "binary search on answer", "greedy feasibility check"], [refs.revision]),
+        questions: [q("Binary Search"), q("First Bad Version"), q("Search Insert Position"), q("Find First and Last Position"), q("Search in Rotated Sorted Array"), q("Find Minimum in Rotated Sorted Array"), q("Peak Index in Mountain Array"), q("Koko Eating Bananas"), q("Capacity to Ship Packages Within D Days"), q("Split Array Largest Sum")],
+      },
+      {
+        name: "Stack / Monotonic Stack interview set",
+        theory: checkpoint("Must know", ["valid parentheses", "next greater", "next smaller", "previous smaller", "monotonic increasing stack", "monotonic decreasing stack", "histogram", "contribution"], [refs.revision]),
+        questions: [q("Valid Parentheses"), q("Min Stack"), q("Next Greater Element I"), q("Daily Temperatures"), q("Online Stock Span"), q("Asteroid Collision"), q("Remove K Digits"), q("Largest Rectangle in Histogram"), q("Maximal Rectangle"), q("Sum of Subarray Minimums")],
+      },
+      {
+        name: "Queue / Deque interview set",
+        theory: pattern("Queue processes in order. Deque helps when both ends or window max/min are needed. BFS queue gives minimum steps in unweighted graphs.", [refs.revision]),
+        questions: [q("Implement Queue using Stacks"), q("Number of Recent Calls"), q("Moving Average from Data Stream"), q("Sliding Window Maximum"), q("Shortest Subarray with Sum at Least K"), q("Jump Game VI"), q("Rotting Oranges"), q("01 Matrix"), q("Open the Lock"), q("Word Ladder")],
+      },
+      {
+        name: "Linked List interview set",
+        theory: checkpoint("Must know", ["reverse list", "slow-fast pointer", "cycle detection", "merge lists", "dummy node", "two pointer gap", "copy random pointer"], [refs.revision]),
+        questions: [q("Reverse Linked List"), q("Middle of the Linked List"), q("Linked List Cycle"), q("Linked List Cycle II"), q("Merge Two Sorted Lists"), q("Remove Nth Node From End"), q("Add Two Numbers"), q("Reorder List"), q("Palindrome Linked List"), q("Copy List with Random Pointer")],
+      },
+      {
+        name: "Tree interview set",
+        theory: checkpoint("Must know", ["DFS recursion", "BFS level order", "height-based recursion", "LCA", "path sum", "tree diameter", "tree DP", "serialization", "tree construction"], [refs.revision]),
+        questions: [q("Maximum Depth of Binary Tree"), q("Same Tree"), q("Invert Binary Tree"), q("Diameter of Binary Tree"), q("Balanced Binary Tree"), q("Binary Tree Level Order Traversal"), q("Binary Tree Zigzag Level Order"), q("Lowest Common Ancestor of Binary Tree"), q("Path Sum II"), q("Binary Tree Maximum Path Sum"), q("Serialize and Deserialize Binary Tree"), q("Construct Binary Tree from Preorder and Inorder")],
+      },
+      {
+        name: "BST interview set",
+        theory: pattern("BST inorder traversal gives sorted order. For validation, each node must lie in a valid range. For search/LCA, use the BST property.", [refs.revision]),
+        questions: [q("Search in a BST"), q("Validate Binary Search Tree"), q("Kth Smallest Element in a BST"), q("Lowest Common Ancestor of BST"), q("Insert into a BST"), q("Delete Node in a BST"), q("Convert Sorted Array to BST"), q("Recover Binary Search Tree"), q("Two Sum IV"), q("BST Iterator")],
+      },
+      {
+        name: "Graph interview set",
+        theory: checkpoint("Must know", ["DFS", "BFS", "grid traversal", "multi-source BFS", "topological sort", "DSU", "Dijkstra", "cycle detection", "bipartite check"], [refs.revision]),
+        questions: [q("Number of Provinces"), q("Number of Islands"), q("Max Area of Island"), q("Rotting Oranges"), q("01 Matrix"), q("Clone Graph"), q("Course Schedule"), q("Course Schedule II"), q("Pacific Atlantic Water Flow"), q("Surrounded Regions"), q("Network Delay Time"), q("Cheapest Flights Within K Stops")],
+      },
+      {
+        name: "Heap interview set",
+        theory: pattern("Heap is useful when repeatedly needing smallest/largest available item. For kth largest, maintain a min heap of size k. For median, use two heaps.", [refs.revision]),
+        questions: [q("Kth Largest Element in an Array"), q("Top K Frequent Elements"), q("Kth Largest Element in a Stream"), q("Merge K Sorted Lists"), q("Find Median from Data Stream"), q("Task Scheduler"), q("Reorganize String"), q("Meeting Rooms II"), q("Single-Threaded CPU"), q("IPO")],
+      },
+      {
+        name: "DP interview set",
+        theory: codeNote("DP explanation template", "dp[i] means ...\nTransition:\ndp[i] = ...\nBase case:\ndp[0] = ...\nFinal answer:\ndp[n] / dp[n-1]", "Define state, transition, base case, and final answer. Then discuss space optimization if possible.", [refs.revision]),
+        questions: [q("Climbing Stairs"), q("House Robber"), q("House Robber II"), q("Coin Change"), q("Coin Change II"), q("Partition Equal Subset Sum"), q("Unique Paths"), q("Minimum Path Sum"), q("Longest Common Subsequence"), q("Edit Distance"), q("Longest Increasing Subsequence"), q("Word Break"), q("Decode Ways"), q("Maximum Product Subarray"), q("Best Time to Buy and Sell Stock with Cooldown")],
+      },
+      {
+        name: "Backtracking interview set",
+        theory: pattern("Backtracking explores all valid choices: choose, explore, undo.", [refs.revision]),
+        questions: [q("Subsets"), q("Subsets II"), q("Permutations"), q("Permutations II"), q("Combination Sum"), q("Combination Sum II"), q("Letter Combinations of a Phone Number"), q("Palindrome Partitioning"), q("Word Search"), q("N-Queens"), q("Sudoku Solver")],
+      },
+      {
+        name: "Design DS interview set",
+        theory: pattern("For every operation, state required time complexity, then choose data structures to satisfy those operations. Most design problems combine two structures.", [refs.revision]),
+        questions: [q("Min Stack"), q("LRU Cache"), q("Insert Delete GetRandom O(1)"), q("Time Based Key-Value Store"), q("Snapshot Array"), q("Design Browser History"), q("Implement Trie"), q("Add and Search Word"), q("Find Median from Data Stream"), q("LFU Cache")],
+      },
+      {
+        name: "Most repeated interview questions",
+        theory: [{ title: "Top must-revise questions", type: "notes", points: ["Two Sum", "Best Time to Buy and Sell Stock", "Maximum Subarray", "Product of Array Except Self", "Longest Consecutive Sequence", "Subarray Sum Equals K", "3Sum", "Container With Most Water", "Trapping Rain Water", "Longest Substring Without Repeating Characters", "Minimum Window Substring", "Search in Rotated Sorted Array", "Koko Eating Bananas", "Valid Parentheses", "Daily Temperatures", "Largest Rectangle in Histogram", "Reverse Linked List", "Linked List Cycle", "Merge Two Sorted Lists", "Reorder List", "Maximum Depth of Binary Tree", "Diameter of Binary Tree", "Lowest Common Ancestor", "Binary Tree Level Order Traversal", "Validate BST", "Number of Islands", "Rotting Oranges", "Course Schedule", "Clone Graph", "Network Delay Time", "Kth Largest Element", "Top K Frequent Elements", "Find Median from Data Stream", "Coin Change", "House Robber", "Longest Increasing Subsequence", "Word Break", "Partition Equal Subset Sum", "Subsets", "Combination Sum", "LRU Cache", "Implement Trie", "Time Based Key-Value Store", "Snapshot Array", "Insert Delete GetRandom O(1)"], references: [refs.revision] }],
+        questions: [],
+      },
+      {
+        name: "Interview revision format",
+        theory: [
+          { title: "Problem revision checklist", type: "notes", points: ["Problem", "Pattern", "Brute force", "Optimized idea", "Data structure used", "Time complexity", "Space complexity", "Edge cases", "Dry run"], references: [refs.revision] },
+          { title: "Speaking template", type: "notes", points: ["First, I will explain brute force.", "Then I will identify the bottleneck.", "Then I will optimize using the required pattern.", "After that I will code and dry run.", "Time complexity is...", "Space complexity is..."], references: [refs.revision] },
+        ],
+        questions: [],
+      },
+      {
+        name: "Final interview revision order",
+        theory: [
+          { title: "12-day order", type: "notes", points: ["Day 1: Array + Hashing", "Day 2: Two Pointer + Sliding Window", "Day 3: Binary Search", "Day 4: Stack + Queue", "Day 5: Linked List", "Day 6: Trees + BST", "Day 7: Graphs", "Day 8: Heap", "Day 9: DP", "Day 10: Backtracking", "Day 11: Design DS", "Day 12: Mixed revision"], references: [refs.revision] },
+          { title: "Minimum target", type: "notes", description: "Solve/revise around 80-100 high-quality questions.", points: ["Array/Hashing: 12", "Two Pointer/Sliding Window: 10", "Binary Search: 8", "Stack/Queue: 8", "Linked List: 8", "Trees/BST: 12", "Graphs: 10", "Heap: 6", "DP: 12", "Backtracking: 6", "Design DS: 8"], references: [refs.revision] },
+          { title: "Final priority patterns", type: "notes", points: ["Prefix sum + hashmap", "Sliding window", "Binary search on answer", "Monotonic stack", "Linked list slow-fast", "Tree DFS recursion", "BFS / DFS graph", "Topological sort", "Dijkstra", "Heap top K / median", "DP pick-not-pick", "Grid DP", "LCS / LIS", "Backtracking", "LRU Cache / Design DS"], references: [refs.revision] },
         ],
         questions: [],
       },
