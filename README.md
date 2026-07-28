@@ -135,3 +135,11 @@ npm run lint
 Checks the project using ESLint.
 
 npm run typecheck
+
+`npm run typecheck`
+
+Performs TypeScript type checking without generating a production build.
+
+This helps identify type errors early and ensures better code reliability before deployment.
+
+Use it regularly during development to catch potential issues before runtime.
